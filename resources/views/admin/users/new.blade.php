@@ -99,7 +99,7 @@
                     </div>
                     <div id="gen_pass" class=" alert alert-success" style="display:none;margin-bottom: 10px;"></div>
                     <div class="form-group">
-                        <label for="pass" class="control-label">Password</label>
+                        <label for="pass" class="control-label">Пароль</label>
                         <div>
                             <input type="password" name="password" class="form-control" />
                         </div>

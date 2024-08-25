@@ -119,23 +119,23 @@ export default ({ backup }: Props) => {
     return (
         <>
             <Dialog.Confirm
-                open={modal === 'unlock'}
+                open={modal === 'Разблокировать'}
                 onClose={() => setModal('')}
-                title={`Unlock "${backup.name}"`}
+                title={`Разблокировать "${backup.name}"`}
                 onConfirmed={onLockToggle}
             >
-                This backup will no longer be protected from automated or accidental deletions.
+                Эта резервная копия больше не будет защищена от автоматического или случайного удаления.
             </Dialog.Confirm>
             <Dialog.Confirm
                 open={modal === 'restore'}
                 onClose={() => setModal('')}
-                confirm={'Restore'}
-                title={`Restore "${backup.name}"`}
+                confirm={'Восстановить'}
+                title={`Восстановить "${backup.name}"`}
                 onConfirmed={() => doRestorationAction()}
             >
                 <p>
-                    Your server will be stopped. You will not be able to control the power state, access the file
-                    manager, or create additional backups until completed.
+                    Ваш сервер будет остановлен. Вы не сможете контролировать состояние питания, получить доступ к файловому
+                    менеджера или создавать дополнительные резервные копии до завершения работы.
                 </p>
                 <p css={tw`mt-4 -mb-2 bg-zinc-700 p-3 rounded`}>
                     <label htmlFor={'restore_truncate'} css={tw`text-base flex items-center cursor-pointer`}>
@@ -147,18 +147,18 @@ export default ({ backup }: Props) => {
                             checked={truncate}
                             onChange={() => setTruncate((s) => !s)}
                         />
-                        Delete all files before restoring backup.
+                        Удалите все файлы перед восстановлением резервной копии.
                     </label>
                 </p>
             </Dialog.Confirm>
             <Dialog.Confirm
-                title={`Delete "${backup.name}"`}
-                confirm={'Continue'}
+                title={`Удалить "${backup.name}"`}
+                confirm={'Продолжить'}
                 open={modal === 'delete'}
                 onClose={() => setModal('')}
                 onConfirmed={doDeletion}
             >
-                This is a permanent operation. The backup cannot be recovered once deleted.
+                Это постоянная операция. После удаления резервная копия не может быть восстановлена.
             </Dialog.Confirm>
             <SpinnerOverlay visible={loading} fixed />
             {backup.isSuccessful ? (
@@ -176,13 +176,13 @@ export default ({ backup }: Props) => {
                         <Can action={'backup.download'}>
                             <DropdownButtonRow onClick={doDownload}>
                                 <CloudDownloadIcon />
-                                <span css={tw`ml-2`}>Download</span>
+                                <span css={tw`ml-2`}>Скачать</span>
                             </DropdownButtonRow>
                         </Can>
                         <Can action={'backup.restore'}>
                             <DropdownButtonRow onClick={() => setModal('restore')}>
                                 <ArchiveIcon />
-                                <span css={tw`ml-2`}>Restore</span>
+                                <span css={tw`ml-2`}>Восстановить</span>
                             </DropdownButtonRow>
                         </Can>
                         <Can action={'backup.delete'}>
@@ -193,12 +193,12 @@ export default ({ backup }: Props) => {
                                     ) : (
                                         <LockClosedIcon css={tw`mr-2`} />
                                     )}
-                                    {backup.isLocked ? 'Unlock' : 'Lock'}
+                                    {backup.isLocked ? 'Разблокировать' : 'Заблокировать'}
                                 </DropdownButtonRow>
                                 {!backup.isLocked && (
                                     <DropdownButtonRow danger onClick={() => setModal('delete')}>
                                         <TrashIcon />
-                                        <span css={tw`ml-2`}>Delete</span>
+                                        <span css={tw`ml-2`}>Удалить</span>
                                     </DropdownButtonRow>
                                 )}
                             </>
