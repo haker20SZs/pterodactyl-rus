@@ -6,15 +6,15 @@
 @extends('layouts.admin')
 
 @section('title')
-    Nests &rarr; New Egg
+    Гнезда &rarr; Новое яйцо
 @endsection
 
 @section('content-header')
-    <h1>New Egg<small>Create a new Egg to assign to servers.</small></h1>
+    <h1>Новое яйцо<small>Создайте новое яйцо, чтобы назначить его серверам.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Admin</a></li>
-        <li><a href="{{ route('admin.nests') }}">Nests</a></li>
-        <li class="active">New Egg</li>
+        <li><a href="{{ route('admin.index') }}">Администратор</a></li>
+        <li><a href="{{ route('admin.nests') }}">Гнезда</a></li>
+        <li class="active">Новое яйцо</li>
     </ol>
 @endsection
 
@@ -24,43 +24,43 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Configuration</h3>
+                    <h3 class="box-title">Конфигурация</h3>
                 </div>
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="pNestId" class="form-label">Associated Nest</label>
+                                <label for="pNestId" class="form-label">Ассоциированное гнездо</label>
                                 <div>
                                     <select name="nest_id" id="pNestId">
                                         @foreach($nests as $nest)
                                             <option value="{{ $nest->id }}" {{ old('nest_id') != $nest->id ?: 'selected' }}>{{ $nest->name }} &lt;{{ $nest->author }}&gt;</option>
                                         @endforeach
                                     </select>
-                                    <p class="text-muted small">Think of a Nest as a category. You can put multiple Eggs in a nest, but consider putting only Eggs that are related to each other in each Nest.</p>
+                                    <p class="text-muted small">Воспринимайте гнездо как категорию. Вы можете поместить в гнездо несколько яиц, но подумайте о том, чтобы поместить в каждое гнездо только те яйца, которые связаны друг с другом.</p>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="pName" class="form-label">Name</label>
+                                <label for="pName" class="form-label">Имя</label>
                                 <input type="text" id="pName" name="name" value="{{ old('name') }}" class="form-control" />
-                                <p class="text-muted small">A simple, human-readable name to use as an identifier for this Egg. This is what users will see as their game server type.</p>
+                                <p class="text-muted small">Простое, читаемое человеком имя, которое будет использоваться в качестве идентификатора для этого яйца. Это то, что пользователи будут видеть как тип их игрового сервера.</p>
                             </div>
                             <div class="form-group">
-                                <label for="pDescription" class="form-label">Description</label>
+                                <label for="pDescription" class="form-label">Описание</label>
                                 <textarea id="pDescription" name="description" class="form-control" rows="8">{{ old('description') }}</textarea>
-                                <p class="text-muted small">A description of this Egg.</p>
+                                <p class="text-muted small">Описание этого яйца.</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="pDockerImage" class="control-label">Docker Images</label>
+                                <label for="pDockerImage" class="control-label">Образы Docker</label>
                                 <textarea id="pDockerImages" name="docker_images" rows="4" placeholder="quay.io/pterodactyl/service" class="form-control">{{ old('docker_images') }}</textarea>
-                                <p class="text-muted small">The docker images available to servers using this egg. Enter one per line. Users will be able to select from this list of images if more than one value is provided.</p>
+                                <p class="text-muted small">Образы docker, доступные для серверов, использующих это яйцо. Введите по одному в каждой строке. Пользователи смогут выбирать из этого списка образов, если указано более одного значения.</p>
                             </div>
                             <div class="form-group">
-                                <label for="pStartup" class="control-label">Startup Command</label>
+                                <label for="pStartup" class="control-label">Команда запуска</label>
                                 <textarea id="pStartup" name="startup" class="form-control" rows="10">{{ old('startup') }}</textarea>
-                                <p class="text-muted small">The default startup command that should be used for new servers created with this Egg. You can change this per-server as needed.</p>
+                                <p class="text-muted small">Команда запуска по умолчанию, которая должна использоваться для новых серверов, созданных с помощью этого Egg. При необходимости вы можете изменить это значение для каждого сервера.</p>
                             </div>
                         </div>
                     </div>
@@ -76,45 +76,45 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="alert alert-warning">
-                                <p>All fields are required unless you select a separate option from the 'Copy Settings From' dropdown, in which case fields may be left blank to use the values from that option.</p>
+                                <p>Все поля обязательны для заполнения, если только вы не выбрали отдельный вариант в раскрывающемся списке 'Копировать настройки из', в этом случае поля можно оставить пустыми, чтобы использовать значения из этого варианта.</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="pConfigFrom" class="form-label">Copy Settings From</label>
+                                <label for="pConfigFrom" class="form-label">Копирование настроек из</label>
                                 <select name="config_from" id="pConfigFrom" class="form-control">
-                                    <option value="">None</option>
+                                    <option value="">Нету</option>
                                 </select>
-                                <p class="text-muted small">If you would like to default to settings from another Egg select it from the dropdown above.</p>
+                                <p class="text-muted small">Если вы хотите использовать по умолчанию настройки из другого яйца, выберите его из выпадающего списка выше.</p>
                             </div>
                             <div class="form-group">
-                                <label for="pConfigStop" class="form-label">Stop Command</label>
+                                <label for="pConfigStop" class="form-label">Команда "Стоп"</label>
                                 <input type="text" id="pConfigStop" name="config_stop" class="form-control" value="{{ old('config_stop') }}" />
-                                <p class="text-muted small">The command that should be sent to server processes to stop them gracefully. If you need to send a <code>SIGINT</code> you should enter <code>^C</code> here.</p>
+                                <p class="text-muted small">Команда, которая должна быть отправлена серверным процессам для их плавной остановки. Если вам нужно отправить <code>SIGINT</code> вы должны ввести <code>^C</code> здесь.</p>
                             </div>
                             <div class="form-group">
-                                <label for="pConfigLogs" class="form-label">Log Configuration</label>
+                                <label for="pConfigLogs" class="form-label">Конфигурация журнала</label>
                                 <textarea data-action="handle-tabs" id="pConfigLogs" name="config_logs" class="form-control" rows="6">{{ old('config_logs') }}</textarea>
-                                <p class="text-muted small">This should be a JSON representation of where log files are stored, and whether or not the daemon should be creating custom logs.</p>
+                                <p class="text-muted small">Это должно быть JSON-представление того, где хранятся файлы журналов, и должен ли демон создавать пользовательские журналы.</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="pConfigFiles" class="form-label">Configuration Files</label>
+                                <label for="pConfigFiles" class="form-label">Конфигурационные файлы</label>
                                 <textarea data-action="handle-tabs" id="pConfigFiles" name="config_files" class="form-control" rows="6">{{ old('config_files') }}</textarea>
-                                <p class="text-muted small">This should be a JSON representation of configuration files to modify and what parts should be changed.</p>
+                                <p class="text-muted small">Это должно быть JSON-представление конфигурационных файлов, которые нужно изменить и какие части должны быть изменены.</p>
                             </div>
                             <div class="form-group">
-                                <label for="pConfigStartup" class="form-label">Start Configuration</label>
+                                <label for="pConfigStartup" class="form-label">Начальная конфигурация</label>
                                 <textarea data-action="handle-tabs" id="pConfigStartup" name="config_startup" class="form-control" rows="6">{{ old('config_startup') }}</textarea>
-                                <p class="text-muted small">This should be a JSON representation of what values the daemon should be looking for when booting a server to determine completion.</p>
+                                <p class="text-muted small">Это должно быть JSON-представление значений, которые демон должен искать при загрузке сервера для определения завершения.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="box-footer">
                     {!! csrf_field() !!}
-                    <button type="submit" class="btn btn-success btn-sm pull-right">Create</button>
+                    <button type="submit" class="btn btn-success btn-sm pull-right">Создать</button>
                 </div>
             </div>
         </div>
@@ -131,7 +131,7 @@
         $('#pConfigFrom').select2();
     });
     $('#pNestId').on('change', function (event) {
-        $('#pConfigFrom').html('<option value="">None</option>').select2({
+        $('#pConfigFrom').html('<option value="">Нет</option>').select2({
             data: $.map(_.get(Pterodactyl.nests, $(this).val() + '.eggs', []), function (item) {
                 return {
                     id: item.id,
