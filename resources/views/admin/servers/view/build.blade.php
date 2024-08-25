@@ -35,59 +35,59 @@
                             <input type="text" name="cpu" class="form-control" value="{{ old('cpu', $server->cpu) }}"/>
                             <span class="input-group-addon">%</span>
                         </div>
-                        <p class="text-muted small">Each <em>physical</em> core on the system is considered to be <code>100%</code>. Setting this value to <code>0</code> will allow a server to use CPU time without restrictions.</p>
+                        <p class="text-muted small">Каждое <em>физическое</em> ядро в системе считается <code>100%</code>. Установив это значение на <code>0</code> позволит серверу использовать процессорное время без ограничений.</p>
                     </div>
                     <div class="form-group">
                         <label for="threads" class="control-label">Ядра ЦПУ</label>
                         <div>
                             <input type="text" name="threads" class="form-control" value="{{ old('threads', $server->threads) }}"/>
                         </div>
-                        <p class="text-muted small"><strong>Advanced:</strong> Enter the specific CPU cores that this process can run on, or leave blank to allow all cores. This can be a single number, or a comma seperated list. Example: <code>0</code>, <code>0-1,3</code>, or <code>0,1,3,4</code>.</p>
+                        <p class="text-muted small"><strong>Расширенный:</strong> Введите конкретные ядра процессора, на которых может работать этот процесс, или оставьте пустым, чтобы разрешить все ядра. Это может быть одно число или список, разделенный запятыми. Пример: <code>0</code>, <code>0-1,3</code>, или <code>0,1,3,4</code>.</p>
                     </div>
                     <div class="form-group">
-                        <label for="memory" class="control-label">Allocated Memory</label>
+                        <label for="memory" class="control-label">Выделенная память</label>
                         <div class="input-group">
                             <input type="text" name="memory" data-multiplicator="true" class="form-control" value="{{ old('memory', $server->memory) }}"/>
                             <span class="input-group-addon">МегаБайт</span>
                         </div>
-                        <p class="text-muted small">The maximum amount of memory allowed for this container. Setting this to <code>0</code> will allow unlimited memory in a container.</p>
+                        <p class="text-muted small">Максимальный объем памяти, допустимый для этого контейнера. Установка этого значения в <code>0</code> позволит использовать неограниченное количество памяти в контейнере.</p>
                     </div>
                     <div class="form-group">
-                        <label for="swap" class="control-label">Allocated Swap</label>
+                        <label for="swap" class="control-label">Распределенный своп</label>
                         <div class="input-group">
                             <input type="text" name="swap" data-multiplicator="true" class="form-control" value="{{ old('swap', $server->swap) }}"/>
                             <span class="input-group-addon">MB</span>
                         </div>
-                        <p class="text-muted small">Setting this to <code>0</code> will disable swap space on this server. Setting to <code>-1</code> will allow unlimited swap.</p>
+                        <p class="text-muted small">Установите это значение на <code>0</code> отключит пространство подкачки на этом сервере. Установка в <code>-1</code> позволит осуществлять неограниченный обмен.</p>
                     </div>
                     <div class="form-group">
-                        <label for="cpu" class="control-label">Disk Space Limit</label>
+                        <label for="cpu" class="control-label">Ограничение дискового пространства</label>
                         <div class="input-group">
                             <input type="text" name="disk" class="form-control" value="{{ old('disk', $server->disk) }}"/>
                             <span class="input-group-addon">MB</span>
                         </div>
-                        <p class="text-muted small">This server will not be allowed to boot if it is using more than this amount of space. If a server goes over this limit while running it will be safely stopped and locked until enough space is available. Set to <code>0</code> to allow unlimited disk usage.</p>
+                        <p class="text-muted small">Этому серверу будет запрещено загружаться, если он использует больше указанного объема пространства. Если сервер превысит этот лимит во время работы, он будет безопасно остановлен и заблокирован до тех пор, пока не освободится достаточно места. Установите на <code>0</code> чтобы разрешить неограниченное использование диска.</p>
                     </div>
                     <div class="form-group">
-                        <label for="io" class="control-label">Block IO Proportion</label>
+                        <label for="io" class="control-label">Блок IO Пропорция</label>
                         <div>
                             <input type="text" name="io" class="form-control" value="{{ old('io', $server->io) }}"/>
                         </div>
-                        <p class="text-muted small"><strong>Advanced</strong>: The IO performance of this server relative to other <em>running</em> containers on the system. Value should be between <code>10</code> and <code>1000</code>.</code></p>
+                        <p class="text-muted small"><strong>Расширенный</strong>: Производительность ввода-вывода этого сервера по сравнению с другими <em>работающими</em>. контейнеров в системе. Значение должно быть между <code>10</code> и <code>1000</code>.</code></p>
                     </div>
                     <div class="form-group">
-                        <label for="cpu" class="control-label">OOM Killer</label>
+                        <label for="cpu" class="control-label">Убийца ООМ</label>
                         <div>
                             <div class="radio radio-danger radio-inline">
                                 <input type="radio" id="pOomKillerEnabled" value="0" name="oom_disabled" @if(!$server->oom_disabled)checked @endif>
-                                <label for="pOomKillerEnabled">Enabled</label>
+                                <label for="pOomKillerEnabled">Включить</label>
                             </div>
                             <div class="radio radio-success radio-inline">
                                 <input type="radio" id="pOomKillerDisabled" value="1" name="oom_disabled" @if($server->oom_disabled)checked @endif>
-                                <label for="pOomKillerDisabled">Disabled</label>
+                                <label for="pOomKillerDisabled">Отключить</label>
                             </div>
                             <p class="text-muted small">
-                                Enabling OOM killer may cause server processes to exit unexpectedly.
+                                Включение OOM killer может привести к неожиданному завершению серверных процессов.
                             </p>
                         </div>
                     </div>
@@ -99,30 +99,30 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Application Feature Limits</h3>
+                            <h3 class="box-title">Ограничения характеристик приложения</h3>
                         </div>
                         <div class="box-body">
                             <div class="row">
                                 <div class="form-group col-xs-6">
-                                    <label for="database_limit" class="control-label">Database Limit</label>
+                                    <label for="database_limit" class="control-label">Предел базы данных</label>
                                     <div>
                                         <input type="text" name="database_limit" class="form-control" value="{{ old('database_limit', $server->database_limit) }}"/>
                                     </div>
-                                    <p class="text-muted small">The total number of databases a user is allowed to create for this server.</p>
+                                    <p class="text-muted small">Общее количество баз данных, которые пользователь может создать для этого сервера.ы</p>
                                 </div>
                                 <div class="form-group col-xs-6">
-                                    <label for="allocation_limit" class="control-label">Allocation Limit</label>
+                                    <label for="allocation_limit" class="control-label">Лимит распределения</label>
                                     <div>
                                         <input type="text" name="allocation_limit" class="form-control" value="{{ old('allocation_limit', $server->allocation_limit) }}"/>
                                     </div>
-                                    <p class="text-muted small">The total number of allocations a user is allowed to create for this server.</p>
+                                    <p class="text-muted small">Общее количество распределений, которое пользователь может создать для этого сервера.</p>
                                 </div>
                                 <div class="form-group col-xs-6">
-                                    <label for="backup_limit" class="control-label">Backup Limit</label>
+                                    <label for="backup_limit" class="control-label">Предел резервного копирования</label>
                                     <div>
                                         <input type="text" name="backup_limit" class="form-control" value="{{ old('backup_limit', $server->backup_limit) }}"/>
                                     </div>
-                                    <p class="text-muted small">The total number of backups that can be created for this server.</p>
+                                    <p class="text-muted small">Общее количество резервных копий, которые могут быть созданы для этого сервера.</p>
                                 </div>
                             </div>
                         </div>
