@@ -44,7 +44,7 @@ export default ({ tokens, open, onClose }: RecoveryTokenDialogProps) => {
                 Эти коды больше не будут отображаться.
             </Alert>
             <Dialog.Footer>
-                <Button.Text onClick={onClose}>Done</Button.Text>
+                <Button.Text onClick={onClose}>Готово</Button.Text>
             </Dialog.Footer>
         </Dialog>
     );
