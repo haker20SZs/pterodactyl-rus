@@ -21,7 +21,7 @@ const EulaModalFeature = () => {
         if (!connected || !instance || status === 'running') return;
 
         const listener = (line: string) => {
-            if (line.toLowerCase().indexOf('чтобы запустить сервер, вам необходимо согласиться с eula') >= 0) {
+            if (line.toLowerCase().indexOf('you need to agree to the eula in order to run the server') >= 0) {
                 setVisible(true);
             }
         };
