@@ -39,7 +39,7 @@ return [
             'window' => env('APP_2FA_WINDOW', 4),
             'verify_newer' => true,
         ],
-        'register' => env('APP_REGISTER_ENABLED', true),
+        'register' => env('APP_REGISTER_ENABLED', false),
     ],
 
     /*
