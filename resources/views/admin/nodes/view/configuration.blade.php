@@ -1,19 +1,14 @@
-{{-- Pterodactyl - Panel --}}
-{{-- Copyright (c) 2015 - 2017 Dane Everitt <dane@daneeveritt.com> --}}
-
-{{-- This software is licensed under the terms of the MIT license. --}}
-{{-- https://opensource.org/licenses/MIT --}}
 @extends('layouts.admin')
 
 @section('title')
-    {{ $node->name }}: Файл Конфигурации
+    {{ $node->name }}: Конфигурация
 @endsection
 
 @section('content-header')
-    <h1>{{ $node->name }}<small>Ваш конфигурационный файл Daemon'a.</small></h1>
+    <h1>{{ $node->name }}<small>Файл конфигурации вашего демона.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Администрация</a></li>
-        <li><a href="{{ route('admin.nodes') }}">Ноды</a></li>
+        <li><a href="{{ route('admin.index') }}">Админ</a></li>
+        <li><a href="{{ route('admin.nodes') }}">Узел</a></li>
         <li><a href="{{ route('admin.nodes.view', $node->id) }}">{{ $node->name }}</a></li>
         <li class="active">Конфигурация</li>
     </ol>
@@ -27,7 +22,7 @@
                 <li><a href="{{ route('admin.nodes.view', $node->id) }}">Информация</a></li>
                 <li><a href="{{ route('admin.nodes.view.settings', $node->id) }}">Настройки</a></li>
                 <li class="active"><a href="{{ route('admin.nodes.view.configuration', $node->id) }}">Конфигурация</a></li>
-                <li><a href="{{ route('admin.nodes.view.allocation', $node->id) }}">Расположения</a></li>
+                <li><a href="{{ route('admin.nodes.view.allocation', $node->id) }}">Распределения</a></li>
                 <li><a href="{{ route('admin.nodes.view.servers', $node->id) }}">Сервера</a></li>
             </ul>
         </div>
@@ -37,7 +32,7 @@
     <div class="col-sm-8">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Файл конфигурации</h3>
+                <h3 class="box-title">Конфигурационный файл</h3>
             </div>
             <div class="box-body">
                 <pre class="no-margin">{{ $node->getYamlConfiguration() }}</pre>
@@ -54,12 +49,12 @@
             </div>
             <div class="box-body">
                 <p class="text-muted small">
-                    Используйте кнопку ниже, чтобы создать пользовательскую команду развертывания, которую можно использовать для настройки
-                    wings на целевом сервере с помощью одной команды.
+                    Используйте кнопку ниже, чтобы создать пользовательскую команду развертывания, которую можно использовать для настройки 
+                    крыльев на целевом сервере с помощью одной команды.
                 </p>
             </div>
             <div class="box-footer">
-                <button type="button" id="configTokenBtn" class="btn btn-sm btn-default" style="width:100%;">Generate Token</button>
+                <button type="button" id="configTokenBtn" class="btn btn-sm btn-default" style="width:100%;">Создать токен</button>
             </div>
         </div>
     </div>
@@ -77,14 +72,14 @@
         }).done(function (data) {
             swal({
                 type: 'success',
-                title: 'Token created.',
-                text: '<p>To auto-configure your node run the following command:<br /><small><pre>cd /etc/pterodactyl && sudo wings configure --panel-url {{ config('app.url') }} --token ' + data.token + ' --node ' + data.node + '{{ config('app.debug') ? ' --allow-insecure' : '' }}</pre></small></p>',
+                title: 'Токен создан.',
+                text: '<p>Для автоматической настройки узла выполните следующую команду:<br /><small><pre>cd /etc/pterodactyl && sudo wings configure --panel-url {{ config('app.url') }} --token ' + data.token + ' --node ' + data.node + '{{ config('app.debug') ? ' --allow-insecure' : '' }}</pre></small></p>',
                 html: true
             })
         }).fail(function () {
             swal({
-                title: 'Error',
-                text: 'Something went wrong creating your token.',
+                title: 'Ошибка',
+                text: 'При создании токена что-то пошло не так.',
                 type: 'error'
             });
         });

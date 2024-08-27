@@ -1,21 +1,16 @@
-{{-- Pterodactyl - Panel --}}
-{{-- Copyright (c) 2015 - 2017 Dane Everitt <dane@daneeveritt.com> --}}
-
-{{-- This software is licensed under the terms of the MIT license. --}}
-{{-- https://opensource.org/licenses/MIT --}}
 @extends('layouts.admin')
 
 @section('title')
-    Сервер — {{ $server->name }}: Детали
+    Server — {{ $server->name }}: Details
 @endsection
 
 @section('content-header')
     <h1>{{ $server->name }}<small>Edit details for this server including owner and container.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Администрация</a></li>
+        <li><a href="{{ route('admin.index') }}">Админ</a></li>
         <li><a href="{{ route('admin.servers') }}">Сервера</a></li>
         <li><a href="{{ route('admin.servers.view', $server->id) }}">{{ $server->name }}</a></li>
-        <li class="active">Детали</li>
+        <li class="active">Details</li>
     </ol>
 @endsection
 
@@ -25,29 +20,29 @@
     <div class="col-xs-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Базовая Информация</h3>
+                <h3 class="box-title">Базовая информация</h3>
             </div>
             <form action="{{ route('admin.servers.view.details', $server->id) }}" method="POST">
                 <div class="box-body">
                     <div class="form-group">
                         <label for="name" class="control-label">Имя сервера <span class="field-required"></span></label>
                         <input type="text" name="name" value="{{ old('name', $server->name) }}" class="form-control" />
-                        <p class="text-muted small">Разрешённые символы: <code>a-zA-Z0-9_-</code> и <code>[Пробел]</code>.</p>
+                        <p class="text-muted small">Ограничения символов: <code>a-zA-Z0-9_-</code> и <code>[Пробел]</code>.</p>
                     </div>
                     <div class="form-group">
-                        <label for="external_id" class="control-label">Внешний Идентификатор </label>
+                        <label for="external_id" class="control-label">Внешний идентификатор</label>
                         <input type="text" name="external_id" value="{{ old('external_id', $server->external_id) }}" class="form-control" />
-                        <p class="text-muted small">Оставьте пустым, чтобы не назначать внешний идентификатор для этого сервера. Внешний идентификатор должен быть уникальным для этого сервера и не использоваться никакими другими серверами.</p>
+                        <p class="text-muted small">Оставьте пустым, чтобы не назначать внешний идентификатор этому серверу. Внешний идентификатор должен быть уникальным для этого сервера и не использоваться другими серверами.</p>
                     </div>
                     <div class="form-group">
                         <label for="pUserId" class="control-label">Владелец сервера <span class="field-required"></span></label>
                         <select name="owner_id" class="form-control" id="pUserId">
                             <option value="{{ $server->owner_id }}" selected>{{ $server->user->email }}</option>
                         </select>
-                        <p class="text-muted small">Вы можете изменить владельца этого сервера, изменив это поле на адрес электронной почты, соответствующий другому использованию в этой системе. Если вы сделаете это, новый маркер безопасности демона будет сгенерирован автоматически.</p>
+                        <p class="text-muted small">Вы можете изменить владельца этого сервера, изменив это поле на адрес электронной почты, соответствующий другому использованию в этой системе. Если вы это сделаете, новый токен безопасности демона будет сгенерирован автоматически.</p>
                     </div>
                     <div class="form-group">
-                        <label for="description" class="control-label">Описание сервера</label>
+                        <label for="description" class="control-label">Описание Сервера.</label>
                         <textarea name="description" rows="3" class="form-control">{{ old('description', $server->description) }}</textarea>
                         <p class="text-muted small">Краткое описание этого сервера.</p>
                     </div>

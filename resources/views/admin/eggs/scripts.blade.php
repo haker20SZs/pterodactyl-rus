@@ -1,19 +1,14 @@
-{{-- Pterodactyl - Panel --}}
-{{-- Copyright (c) 2015 - 2017 Dane Everitt <dane@daneeveritt.com> --}}
-
-{{-- This software is licensed under the terms of the MIT license. --}}
-{{-- https://opensource.org/licenses/MIT --}}
 @extends('layouts.admin')
 
 @section('title')
-    Гнезда &rarr; яйцо: {{ $egg->name }} &rarr; Установить скрипт
+    Сервис &rarr; Ядро: {{ $egg->name }} &rarr; Установка скрипта
 @endsection
 
 @section('content-header')
     <h1>{{ $egg->name }}<small>Управляйте сценарием установки для этого яйца.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Администратор</a></li>
-        <li><a href="{{ route('admin.nests') }}">Гнезда</a></li>
+        <li><a href="{{ route('admin.index') }}">Админ</a></li>
+        <li><a href="{{ route('admin.nests') }}">Сервис</a></li>
         <li><a href="{{ route('admin.nests.view', $egg->nest->id) }}">{{ $egg->nest->name }}</a></li>
         <li><a href="{{ route('admin.nests.egg.view', $egg->id) }}">{{ $egg->name }}</a></li>
         <li class="active">{{ $egg->name }}</li>
@@ -27,7 +22,7 @@
             <ul class="nav nav-tabs">
                 <li><a href="{{ route('admin.nests.egg.view', $egg->id) }}">Конфигурация</a></li>
                 <li><a href="{{ route('admin.nests.egg.variables', $egg->id) }}">Переменные</a></li>
-                <li class="active"><a href="{{ route('admin.nests.egg.scripts', $egg->id) }}"></a>Установить скрипт</li>
+                <li class="active"><a href="{{ route('admin.nests.egg.scripts', $egg->id) }}">Установка скрипта</a></li>
             </ul>
         </div>
     </div>
@@ -37,12 +32,12 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Установить скрипт</h3>
+                    <h3 class="box-title">Установка скрипта</h3>
                 </div>
                 @if(! is_null($egg->copyFrom))
                     <div class="box-body">
                         <div class="callout callout-warning no-margin">
-                            Этот вариант обслуживания копирует сценарии установки и параметры контейнера из <a href="{{ route('admin.nests.egg.view', $egg->copyFrom->id) }}">{{ $egg->copyFrom->name }}</a>. Любые изменения, внесенные в этот сценарий, не будут применяться, если вы не выберете "Нет" в раскрывающемся окне ниже.
+                            Этот вариант службы копирует сценарии установки и параметры контейнера из <a href="{{ route('admin.nests.egg.view', $egg->copyFrom->id) }}">{{ $egg->copyFrom->name }}</a>. Любые изменения, внесенные вами в этот скрипт, не будут применены, если вы не выберете «Нет» в раскрывающемся списке ниже.
                         </div>
                     </div>
                 @endif
@@ -52,29 +47,29 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="form-group col-sm-4">
-                            <label class="control-label">Скопируйте сценарий из</label>
+                            <label class="control-label">Копировать скрипт из</label>
                             <select id="pCopyScriptFrom" name="copy_script_from">
-                                <option value="">Нету</option>
+                                <option value="">Нет</option>
                                 @foreach($copyFromOptions as $opt)
                                     <option value="{{ $opt->id }}" {{ $egg->copy_script_from !== $opt->id ?: 'selected' }}>{{ $opt->name }}</option>
                                 @endforeach
                             </select>
-                            <p class="text-muted small">Если выбран этот пункт, сценарий выше будет проигнорирован, а вместо него будет использован сценарий из выбранной опции.</p>
+                            <p class="text-muted small">Если этот флажок установлен, приведенный выше сценарий будет игнорироваться и вместо него будет использоваться сценарий из выбранного варианта.</p>
                         </div>
                         <div class="form-group col-sm-4">
                             <label class="control-label">Контейнер сценариев</label>
                             <input type="text" name="script_container" class="form-control" value="{{ $egg->script_container }}" />
-                            <p class="text-muted small">Контейнер Docker, который будет использоваться при запуске этого сценария для сервера.</p>
+                            <p class="text-muted small">Контейнер Docker, который будет использоваться при запуске этого сценария на сервере.</p>
                         </div>
                         <div class="form-group col-sm-4">
                             <label class="control-label">Команда точки входа сценария</label>
                             <input type="text" name="script_entry" class="form-control" value="{{ $egg->script_entry }}" />
-                            <p class="text-muted small">Команда точки входа, которую следует использовать для этого сценария.</p>
+                            <p class="text-muted small">Команда точки входа, используемая для этого сценария.</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 text-muted">
-                            Следующие параметры обслуживания зависят от этого сценария:
+                            Следующие варианты обслуживания зависят от этого сценария:
                             @if(count($relyOnScript) > 0)
                                 @foreach($relyOnScript as $rely)
                                     <a href="{{ route('admin.nests.egg.view', $rely->id) }}">
@@ -82,7 +77,7 @@
                                     </a>
                                 @endforeach
                             @else
-                                <em>Нету</em>
+                                <em>нет</em>
                             @endif
                         </div>
                     </div>

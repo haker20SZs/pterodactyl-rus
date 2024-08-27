@@ -158,7 +158,7 @@ export default ({ database, className }: Props) => {
                 <div css={tw`ml-8 text-center hidden md:block`}>
                     <p css={tw`text-sm`}>{database.allowConnectionsFrom}</p>
                     <p css={tw`mt-1 text-2xs text-zinc-600 dark:text-zinc-500 uppercase select-none`}>
-                        Connections from
+                        Соединения из
                     </p>
                 </div>
                 <div css={tw`ml-8 text-center hidden md:block`}>

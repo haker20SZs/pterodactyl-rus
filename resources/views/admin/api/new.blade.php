@@ -1,15 +1,15 @@
 @extends('layouts.admin')
 
 @section('title')
-    API приложений
+    API приложения
 @endsection
 
 @section('content-header')
-    <h1>Application API<small>Создайте новый ключ API приложения.</small></h1>
+    <h1>API приложения<small> Создайте новый ключ API приложения.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Администратор</a></li>
-        <li><a href="{{ route('admin.api.index') }}">API приложений</a></li>
-        <li class="active">Новые полномочия</li>
+        <li><a href="{{ route('admin.index') }}">Админ</a></li>
+        <li><a href="{{ route('admin.api.index') }}">API приложения</a></li>
+        <li class="active">API приложения</li>
     </ol>
 @endsection
 
@@ -19,7 +19,7 @@
             <div class="col-sm-8 col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Выберите Разрешения</h3>
+                        <h3 class="box-title">Выберите разрешения</h3>
                     </div>
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
@@ -36,7 +36,7 @@
                                     </td>
                                     <td class="col-sm-3 radio text-center">
                                         <input type="radio" id="n_{{ $resource }}" name="r_{{ $resource }}" value="{{ $permissions['n'] }}" checked>
-                                        <label for="n_{{ $resource }}">Нету</label>
+                                        <label for="n_{{ $resource }}">Ничего</label>
                                     </td>
                                 </tr>
                             @endforeach
@@ -51,11 +51,11 @@
                             <label class="control-label" for="memoField">Описание <span class="field-required"></span></label>
                             <input id="memoField" type="text" name="memo" class="form-control">
                         </div>
-                        <p class="text-muted">После назначения прав и создания этого набора учетных данных вы не сможете вернуться и отредактировать его. Если в дальнейшем вам понадобится внести изменения, вам нужно будет создать новый набор учетных данных.</p>
+                        <p class="text-muted">После того как вы назначили разрешения и создали этот набор учетных данных, вы не сможете вернуться и отредактировать его. Если вам потребуется внести изменения в будущем, вам потребуется создать новый набор учетных данных.</p>
                     </div>
                     <div class="box-footer">
                         {{ csrf_field() }}
-                        <button type="submit" class="btn btn-success btn-sm pull-right">Создать учетные данные</button>
+                        <button type="submit" class="btn btn-success btn-sm pull-right">Создать API</button>
                     </div>
                 </div>
             </div>

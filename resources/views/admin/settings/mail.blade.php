@@ -26,7 +26,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="alert alert-info no-margin-bottom">
-                                    Tего интерфейс ограничен экземплярами, использующими SMTP в качестве почтового драйвера. Пожалуйста, используйте <code>php artisan p:environment:mail</code> чтобы обновить настройки электронной почты, или установите <code>MAIL_DRIVER=smtp</code> в файле окружения.
+                                    Этот интерфейс предназначен только для экземпляров, использующих SMTP в качестве почтового драйвера. Пожалуйста, используйте <code>php artisan p:environment:mail</code> чтобы обновить настройки электронной почты, или установите <code>MAIL_DRIVER=smtp</code> в файле окружения.
                                 </div>
                             </div>
                         </div>
@@ -38,43 +38,43 @@
                                 <div class="form-group col-md-6">
                                     <label class="control-label">SMTP хост</label>
                                     <div>
-                                        <input required type="text" class="form-control" name="mail:host" value="{{ old('mail:host', config('mail.host')) }}" />
+                                        <input required type="text" class="form-control" name="mail:mailers:smtp:host" value="{{ old('mail:mailers:smtp:host', config('mail.mailers.smtp.host')) }}" />
                                         <p class="text-muted small">Введите адрес SMTP-сервера, через который будет отправляться почта.</p>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label class="control-label">SMTP порт</label>
                                     <div>
-                                        <input required type="number" class="form-control" name="mail:port" value="{{ old('mail:port', config('mail.port')) }}" />
-                                        <p class="text-muted small">Введите порт SMTP-сервера, через который будет отправляться почта.</p>
+                                        <input required type="number" class="form-control" name="mail:mailers:smtp:port" value="{{ old('mail:mailers:smtp:port', config('mail.mailers.smtp.port')) }}" />
+                                        <p class="text-muted small">Введите порт SMTP-сервера, через который будет отправляться почта..</p>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label class="control-label">Шифрование</label>
                                     <div>
                                         @php
-                                            $encryption = old('mail:encryption', config('mail.encryption'));
+                                            $encryption = old('mail:mailers:smtp:encryption', config('mail.mailers.smtp.encryption'));
                                         @endphp
-                                        <select name="mail:encryption" class="form-control">
+                                        <select name="mail:mailers:smtp:encryption" class="form-control">
                                             <option value="" @if($encryption === '') selected @endif>Нету</option>
                                             <option value="tls" @if($encryption === 'tls') selected @endif>Безопасность транспортного уровня (TLS)</option>
                                             <option value="ssl" @if($encryption === 'ssl') selected @endif>Уровень защищенных сокетов (SSL)</option>
                                         </select>
-                                        <p class="text-muted small">Имя пользователяВыберите тип шифрования, который будет использоваться при отправке почты.</p>
+                                        <p class="text-muted small">Выберите тип шифрования, который будет использоваться при отправке почты.</p>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Имя пользователя <span class="field-optional"></span></label>
                                     <div>
-                                        <input type="text" class="form-control" name="mail:username" value="{{ old('mail:username', config('mail.username')) }}" />
-                                        <p class="text-muted small">Имя пользователя, которое будет использоваться при подключении к SMTP-серверу.</p>
+                                        <input type="text" class="form-control" name="mail:mailers:smtp:username" value="{{ old('mail:mailers:smtp:username', config('mail.mailers.smtp.username')) }}" />
+                                        <p class="text-muted small">Имя пользователя, используемое при подключении к SMTP-сервисуr.</p>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="control-label">Пароль <span class="field-optional"></span></label>
                                     <div>
-                                        <input type="password" class="form-control" name="mail:password"/>
-                                        <p class="text-muted small">Пароль для использования в сочетании с именем пользователя SMTP. Оставьте пустым, чтобы продолжить использовать существующий пароль. Для установки пустого значения пароля введите <code>!e</code> в поле.</p>
+                                        <input type="password" class="form-control" name="mail:mailers:smtp:password" value="{{ old('mail:mailers:smtp:password', config('mail.mailers.smtp.password')) }}"/>
+                                        <p class="text-muted small">Пароль для использования в сочетании с именем пользователя SMTP. Оставьте пустым, чтобы продолжать использовать существующий пароль. Чтобы установить пароль на пустое значение, введите <code>!e</code> в поле.</p>
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
                                     <label class="control-label">Почта от имени <span class="field-optional"></span></label>
                                     <div>
                                         <input type="text" class="form-control" name="mail:from:name" value="{{ old('mail:from:name', config('mail.from.name')) }}" />
-                                        <p class="text-muted small">Имя, от которого должны приходить электронные письма.</p>
+                                        <p class="text-muted small">Имя, с которого должны приходить электронные письма.</p>
                                     </div>
                                 </div>
                             </div>
@@ -120,11 +120,11 @@
                 url: '/admin/settings/mail',
                 contentType: 'application/json',
                 data: JSON.stringify({
-                    'mail:host': $('input[name="mail:host"]').val(),
-                    'mail:port': $('input[name="mail:port"]').val(),
-                    'mail:encryption': $('select[name="mail:encryption"]').val(),
-                    'mail:username': $('input[name="mail:username"]').val(),
-                    'mail:password': $('input[name="mail:password"]').val(),
+                    'mail:mailers:smtp:host': $('input[name="mail:mailers:smtp:host"]').val(),
+                    'mail:mailers:smtp:port': $('input[name="mail:mailers:smtp:port"]').val(),
+                    'mail:mailers:smtp:encryption': $('select[name="mail:mailers:smtp:encryption"]').val(),
+                    'mail:mailers:smtp:username': $('input[name="mail:mailers:smtp:username"]').val(),
+                    'mail:mailers:smtp:password': $('input[name="mail:mailers:smtp:password"]').val(),
                     'mail:from:address': $('input[name="mail:from:address"]').val(),
                     'mail:from:name': $('input[name="mail:from:name"]').val()
                 }),
@@ -138,7 +138,7 @@
             swal({
                 type: 'info',
                 title: 'Настройки тестовой почты',
-                text: 'Нажмите "Тест", чтобы начать тест.',
+                text: 'Нажмите «Тест», чтобы начать тест.',
                 showCancelButton: true,
                 confirmButtonText: 'Тест',
                 closeOnConfirm: false,

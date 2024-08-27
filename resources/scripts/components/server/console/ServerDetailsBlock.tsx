@@ -90,12 +90,12 @@ const ServerDetailsBlock = ({ className }: { className?: string }) => {
 
     return (
         <div className={classNames('grid grid-cols-6 gap-2 md:gap-4', className)}>
-            <StatBlock icon={<WifiIcon />} title={'Address'} copyOnClick={allocation}>
+            <StatBlock icon={<WifiIcon />} title={'Адрес'} copyOnClick={allocation}>
                 {allocation}
             </StatBlock>
             <StatBlock
                 icon={<ClockIcon />}
-                title={'Uptime'}
+                title={'Время работы'}
                 color={getBackgroundColor(status === 'running' ? 0 : status !== 'offline' ? 9 : 10, 10)}
             >
                 {status === 'starting' || status === 'stopping' ? (
@@ -103,43 +103,43 @@ const ServerDetailsBlock = ({ className }: { className?: string }) => {
                 ) : stats.uptime > 0 ? (
                     <UptimeDuration uptime={stats.uptime / 1000} />
                 ) : (
-                    'Offline'
+                    'Оффлайн'
                 )}
             </StatBlock>
             <StatBlock
                 icon={<DesktopComputerIcon />}
-                title={'CPU Load'}
+                title={'Загрузка процессора'}
                 color={getBackgroundColor(stats.cpu, limits.cpu)}
             >
                 {status === 'offline' ? (
-                    <span className={'text-gray-400'}>Offline</span>
+                    <span className={'text-gray-400'}>Оффлайн</span>
                 ) : (
                     <Limit limit={textLimits.cpu}>{stats.cpu.toFixed(2)}%</Limit>
                 )}
             </StatBlock>
             <StatBlock
                 icon={<ChipIcon />}
-                title={'Memory'}
+                title={'Память'}
                 color={getBackgroundColor(stats.memory / 1024, limits.memory * 1024)}
             >
                 {status === 'offline' ? (
-                    <span className={'text-gray-400'}>Offline</span>
+                    <span className={'text-gray-400'}>Оффлайн</span>
                 ) : (
                     <Limit limit={textLimits.memory}>{bytesToString(stats.memory)}</Limit>
                 )}
             </StatBlock>
             <StatBlock
                 icon={<ServerIcon />}
-                title={'Disk'}
+                title={'Диск'}
                 color={getBackgroundColor(stats.disk / 1024, limits.disk * 1024)}
             >
                 <Limit limit={textLimits.disk}>{bytesToString(stats.disk)}</Limit>
             </StatBlock>
-            <StatBlock icon={<CloudDownloadIcon />} title={'Network (Inbound)'}>
-                {status === 'offline' ? <span className={'text-gray-400'}>Offline</span> : bytesToString(stats.rx)}
+            <StatBlock icon={<CloudDownloadIcon />} title={'Сеть (входящие)'}>
+                {status === 'offline' ? <span className={'text-gray-400'}>Оффлайн</span> : bytesToString(stats.rx)}
             </StatBlock>
-            <StatBlock icon={<CloudUploadIcon />} title={'Network (Outbound)'}>
-                {status === 'offline' ? <span className={'text-gray-400'}>Offline</span> : bytesToString(stats.tx)}
+            <StatBlock icon={<CloudUploadIcon />} title={'Сеть (исходящая)'}>
+                {status === 'offline' ? <span className={'text-gray-400'}>Оффлайн</span> : bytesToString(stats.tx)}
             </StatBlock>
         </div>
     );

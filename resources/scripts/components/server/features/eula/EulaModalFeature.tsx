@@ -21,7 +21,7 @@ const EulaModalFeature = () => {
         if (!connected || !instance || status === 'running') return;
 
         const listener = (line: string) => {
-            if (line.toLowerCase().indexOf('you need to agree to the eula in order to run the server') >= 0) {
+            if (line.toLowerCase().indexOf('чтобы запустить сервер, вам необходимо согласиться с eula') >= 0) {
                 setVisible(true);
             }
         };
@@ -65,9 +65,9 @@ const EulaModalFeature = () => {
             showSpinnerOverlay={loading}
         >
             <FlashMessageRender key={'feature:eula'} css={tw`mb-4`} />
-            <h2 css={tw`text-2xl mb-4 text-zinc-900 dark:text-zinc-100`}>Accept Minecraft&reg; EULA</h2>
+            <h2 css={tw`text-2xl mb-4 text-zinc-900 dark:text-zinc-100`}>Примите Minecraft&reg; EULA</h2>
             <p css={tw`text-zinc-800 dark:text-zinc-200`}>
-                By pressing {'"I Accept"'} below you are indicating your agreement to the&nbsp;
+                Нажимая кнопку {'"Я принимаю"'} ниже, вы подтверждаете свое согласие с&nbsp;
                 <a
                     target={'_blank'}
                     css={tw`text-primary-300 underline transition-colors duration-150 hover:text-primary-400`}
@@ -80,10 +80,10 @@ const EulaModalFeature = () => {
             </p>
             <div css={tw`mt-8 sm:flex items-center justify-end`}>
                 <Button isSecondary onClick={() => setVisible(false)} css={tw`w-full sm:w-auto border-transparent`}>
-                    Cancel
+                    Отменить
                 </Button>
                 <Button onClick={onAcceptEULA} css={tw`mt-4 sm:mt-0 sm:ml-4 w-full sm:w-auto`}>
-                    I Accept
+                    Я принимаю
                 </Button>
             </div>
         </Modal>

@@ -1,12 +1,7 @@
-{{-- Pterodactyl - Panel --}}
-{{-- Copyright (c) 2015 - 2017 Dane Everitt <dane@daneeveritt.com> --}}
-
-{{-- This software is licensed under the terms of the MIT license. --}}
-{{-- https://opensource.org/licenses/MIT --}}
 @extends('layouts.admin')
 
 @section('title')
-    Список нод
+    Список Узлов
 @endsection
 
 @section('scripts')
@@ -15,10 +10,10 @@
 @endsection
 
 @section('content-header')
-    <h1>Ноды<small> которые подключили к этой панели</small></h1>
+    <h1>Узлы<small>Все узлы доступны в системе.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Администрация</a></li>
-        <li class="active">Ноды</li>
+        <li><a href="{{ route('admin.index') }}">Админ</a></li>
+        <li class="active">Узлы</li>
     </ol>
 @endsection
 
@@ -27,14 +22,14 @@
     <div class="col-xs-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Список нод</h3>
+                <h3 class="box-title">Список Узлов</h3>
                 <div class="box-tools search01">
                     <form action="{{ route('admin.nodes') }}" method="GET">
                         <div class="input-group input-group-sm">
-                            <input type="text" name="filter[name]" class="form-control pull-right" value="{{ request()->input('filter.name') }}" placeholder="Поиск нод">
+                            <input type="text" name="filter[name]" class="form-control pull-right" value="{{ request()->input('filter.name') }}" placeholder="Поиск узлов">
                             <div class="input-group-btn">
                                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                <a href="{{ route('admin.nodes.new') }}"><button type="button" class="btn btn-sm btn-primary" style="border-radius: 0 3px 3px 0;margin-left:-1px;">Создать новую</button></a>
+                                <a href="{{ route('admin.nodes.new') }}"><button type="button" class="btn btn-sm btn-primary" style="border-radius: 0 3px 3px 0;margin-left:-1px;">Создать Новый</button></a>
                             </div>
                         </div>
                     </form>
@@ -45,21 +40,21 @@
                     <tbody>
                         <tr>
                             <th></th>
-                            <th>Название</th>
+                            <th>Имя</th>
                             <th>Локация</th>
-                            <th>ОЗУ</th>
+                            <th>Память</th>
                             <th>Диск</th>
                             <th class="text-center">Сервера</th>
                             <th class="text-center">SSL</th>
-                            <th class="text-center">Публичная</th>
+                            <th class="text-center">Общественный</th>
                         </tr>
                         @foreach ($nodes as $node)
                             <tr>
                                 <td class="text-center text-muted left-icon" data-action="ping" data-secret="{{ $node->getDecryptedKey() }}" data-location="{{ $node->scheme }}://{{ $node->fqdn }}:{{ $node->daemonListen }}/api/system"><i class="fa fa-fw fa-refresh fa-spin"></i></td>
                                 <td>{!! $node->maintenance_mode ? '<span class="label label-warning"><i class="fa fa-wrench"></i></span> ' : '' !!}<a href="{{ route('admin.nodes.view', $node->id) }}">{{ $node->name }}</a></td>
                                 <td>{{ $node->location->short }}</td>
-                                <td>{{ $node->memory }} МегаБайт</td>
-                                <td>{{ $node->disk }} МегаБайт</td>
+                                <td>{{ $node->memory }} MiB</td>
+                                <td>{{ $node->disk }} MiB</td>
                                 <td class="text-center">{{ $node->servers_count }}</td>
                                 <td class="text-center" style="color:{{ ($node->scheme === 'https') ? '#50af51' : '#d9534f' }}"><i class="fa fa-{{ ($node->scheme === 'https') ? 'lock' : 'unlock' }}"></i></td>
                                 <td class="text-center"><i class="fa fa-{{ ($node->public) ? 'eye' : 'eye-slash' }}"></i></td>
@@ -96,7 +91,7 @@
                 });
                 $(element).removeClass('text-muted').find('i').removeClass().addClass('fa fa-fw fa-heartbeat faa-pulse animated').css('color', '#50af51');
             }).fail(function (error) {
-                var errorText = 'Error connecting to node! Check browser console for details.';
+                var errorText = 'Ошибка подключения к узлу! Подробности проверьте в консоли браузера.';
                 try {
                     errorText = error.responseJSON.errors[0].detail || errorText;
                 } catch (ex) {}

@@ -1,8 +1,3 @@
-{{-- Pterodactyl - Panel --}}
-{{-- Copyright (c) 2015 - 2017 Dane Everitt <dane@daneeveritt.com> --}}
-
-{{-- This software is licensed under the terms of the MIT license. --}}
-{{-- https://opensource.org/licenses/MIT --}}
 @extends('layouts.admin')
 
 @section('title')
@@ -10,9 +5,9 @@
 @endsection
 
 @section('content-header')
-    <h1>Создание сервера<small> в панели.</small></h1>
+    <h1>Создать сервер<small>Добавьте в панель новый сервер.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Администратор</a></li>
+        <li><a href="{{ route('admin.index') }}">Админ</a></li>
         <li><a href="{{ route('admin.servers') }}">Сервера</a></li>
         <li class="active">Создать сервер</li>
     </ol>
@@ -24,7 +19,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Детали сервера</h3>
+                    <h3 class="box-title">Основные детали</h3>
                 </div>
 
                 <div class="box-body row">
@@ -32,13 +27,13 @@
                         <div class="form-group">
                             <label for="pName">Имя сервера</label>
                             <input type="text" class="form-control" id="pName" name="name" value="{{ old('name') }}" placeholder="Имя сервера">
-                            <p class="small text-muted no-margin">Разрешённые символы: <code>a-z A-Z 0-9 _ - .</code> и <code>[Пробел]</code>.</p>
+                            <p class="small text-muted no-margin">Ограничения на количество символов: <code>a-z A-Z 0-9 _ - .</code> и <code>[Пробел]</code>.</p>
                         </div>
 
                         <div class="form-group">
                             <label for="pUserId">Владелец сервера</label>
                             <select id="pUserId" name="owner_id" class="form-control" style="padding-left:0;"></select>
-                            <p class="small text-muted no-margin">Адрес почты Владельца Сервера</p>
+                            <p class="small text-muted no-margin">Адрес электронной почты Владельца сервера.</p>
                         </div>
                     </div>
 
@@ -66,12 +61,12 @@
             <div class="box">
                 <div class="overlay" id="allocationLoader" style="display:none;"><i class="fa fa-refresh fa-spin"></i></div>
                 <div class="box-header with-border">
-                    <h3 class="box-title">Менеджер Распределений</h3>
+                    <h3 class="box-title">Управление распределением</h3>
                 </div>
 
                 <div class="box-body row">
                     <div class="form-group col-sm-4">
-                        <label for="pNodeId">Нода</label>
+                        <label for="pNodeId">Узел</label>
                         <select name="node_id" id="pNodeId" class="form-control">
                             @foreach($locations as $location)
                                 <optgroup label="{{ $location->long }} ({{ $location->short }})">
@@ -86,19 +81,19 @@
                             @endforeach
                         </select>
 
-                        <p class="small text-muted no-margin">Нода, на котором будет развернут этот сервер.</p>
+                        <p class="small text-muted no-margin">Узел, на котором будет развернут этот сервер.</p>
                     </div>
 
                     <div class="form-group col-sm-4">
-                        <label for="pAllocation">Основное Распределение</label>
+                        <label for="pAllocation">Распределение по умолчанию</label>
                         <select id="pAllocation" name="allocation_id" class="form-control"></select>
-                        <p class="small text-muted no-margin">Основное распределение, которое будет назначено этому серверу.</p>
+                        <p class="small text-muted no-margin">Основное выделение, которое будет назначено этому серверу.</p>
                     </div>
 
                     <div class="form-group col-sm-4">
-                        <label for="pAllocationAdditional">Дополнительные Распределения</label>
+                        <label for="pAllocationAdditional">Дополнительное распределение(я)</label>
                         <select id="pAllocationAdditional" name="allocation_additional[]" class="form-control" multiple></select>
-                        <p class="small text-muted no-margin">Дополнительные распределения для назначения этому серверу при создании.</p>
+                        <p class="small text-muted no-margin">Дополнительные выделения, которые необходимо назначить этому серверу при создании.</p>
                     </div>
                 </div>
             </div>
@@ -115,25 +110,25 @@
 
                 <div class="box-body row">
                     <div class="form-group col-xs-6">
-                        <label for="pDatabaseLimit" class="control-label">Лимит Датабаз</label>
+                        <label for="pDatabaseLimit" class="control-label">Лимит баз данных</label>
                         <div>
                             <input type="text" id="pDatabaseLimit" name="database_limit" class="form-control" value="{{ old('database_limit', 0) }}"/>
                         </div>
-                        <p class="text-muted small">Общее количество баз данных, которые пользователю разрешено создавать для этого сервера.</p>
+                        <p class="text-muted small">Общее количество баз данных, которые пользователю разрешено создать для этого сервера.</p>
                     </div>
                     <div class="form-group col-xs-6">
-                        <label for="pAllocationLimit" class="control-label">Лимит Распределений</label>
+                        <label for="pAllocationLimit" class="control-label">Лимит распределений</label>
                         <div>
                             <input type="text" id="pAllocationLimit" name="allocation_limit" class="form-control" value="{{ old('allocation_limit', 0) }}"/>
                         </div>
-                        <p class="text-muted small">Общее количество распределений, которые пользователю разрешено создавать для этого сервера.</p>
+                        <p class="text-muted small">Общее количество выделений, которые пользователю разрешено создать для этого сервера.</p>
                     </div>
                     <div class="form-group col-xs-6">
-                        <label for="pBackupLimit" class="control-label">Лимит Резервных Копий</label>
+                        <label for="pBackupLimit" class="control-label">Лимит резервных копий</label>
                         <div>
                             <input type="text" id="pBackupLimit" name="backup_limit" class="form-control" value="{{ old('backup_limit', 0) }}"/>
                         </div>
-                        <p class="text-muted small">Общее количество резервных копий, которые могут быть созданы для этого сервера.</p>
+                        <p class="text-muted small">Общее количество резервных копий, которые можно создать для этого сервера.</p>
                     </div>
                 </div>
             </div>
@@ -143,66 +138,66 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Управление ресурсами сервера</h3>
+                    <h3 class="box-title">Управление ресурсами</h3>
                 </div>
 
                 <div class="box-body row">
                     <div class="form-group col-xs-6">
-                        <label for="pCPU">Лимит ЦПУ</label>
+                        <label for="pCPU">Лимит Процессора</label>
 
                         <div class="input-group">
                             <input type="text" id="pCPU" name="cpu" class="form-control" value="{{ old('cpu', 0) }}" />
                             <span class="input-group-addon">%</span>
                         </div>
 
-                        <p class="text-muted small">Если вы не хотите ограничивать загрузку процессора, установите значение <code>0</code>. Чтобы определить значение, возьмите количество потоков и умножьте его на 100. Например, в четырехъядерной системе без гиперпоточности <code>(6 * 100 = 600)</code> доступно <code>600%</code>. Чтобы ограничить использование сервером половины одного потока, вы должны установить значение <code>50</code>. Чтобы разрешить серверу использовать до двух потоков, установите значение <code>200</code>.<p>
                     </div>
+                        <p class="text-muted small">Если вы не хотите ограничивать использование ЦП, установите значение <code>0</code>. Чтобы определить значение, возьмите количество нитей и умножьте его на 100. Например, на четырехъядерной системе без гиперпоточности. <code>(4 * 100 = 400)</code> есть <code>400%</code> доступно. Чтобы ограничить использование сервером половины одного потока, установите значение <code>50</code>. Чтобы разрешить серверу использовать до двух потоков, установите значение <code>200</code>.<p>
 
                     <div class="form-group col-xs-6">
-                        <label for="pThreads">Использование ЦПУ</label>
+                        <label for="pThreads">Закрепление процессора</label>
 
                         <div>
                             <input type="text" id="pThreads" name="threads" class="form-control" value="{{ old('threads') }}" />
                         </div>
 
-                        <p class="text-muted small"><strong>Подробно:</strong>Введите конкретные потоки ЦПУ, на которых может выполняться этот процесс, или оставьте поле пустым, чтобы разрешить все потоки. Это может быть одно число или список, разделенный запятыми. Пример: <code>0</code>, <code>0-1,3 </code> или <code>0,1,3,4</code>.</p>
+                        <p class="text-muted small"><strong>Расширенные:</strong> Введите конкретные потоки ЦП, в которых может выполняться этот процесс, или оставьте поле пустым, чтобы разрешить все потоки. Это может быть одно число или список, разделенный запятыми. Например: <code>0</code>, <code>0-1,3</code>, или <code>0,1,3,4</code>.</p>
                     </div>
                 </div>
 
                 <div class="box-body row">
                     <div class="form-group col-xs-6">
-                        <label for="pMemory">ОЗУ</label>
+                        <label for="pMemory">Памят</label>
 
                         <div class="input-group">
                             <input type="text" id="pMemory" name="memory" class="form-control" value="{{ old('memory') }}" />
-                            <span class="input-group-addon">МегаБайт</span>
+                            <span class="input-group-addon">MiB</span>
                         </div>
 
-                        <p class="text-muted small">Максимальный объем памяти, разрешенный для этого контейнера. Установка этого значения в <code>0 </code> позволит использовать неограниченное количество памяти в контейнере.</p>
+                        <p class="text-muted small">Максимальный объем памяти, разрешенный для этого контейнера. Установка значения <code>0</code> позволит использовать неограниченный объем памяти в контейнере.</p>
                     </div>
 
                     <div class="form-group col-xs-6">
-                        <label for="pSwap">Файл Подкачки</label>
+                        <label for="pSwap">Подкачка</label>
 
                         <div class="input-group">
                             <input type="text" id="pSwap" name="swap" class="form-control" value="{{ old('swap', 0) }}" />
-                            <span class="input-group-addon">МегаБайт</span>
+                            <span class="input-group-addon">MiB</span>
                         </div>
 
-                        <p class="text-muted small">Установка значения <code>0</code> отключит пространство подкачки на этом сервере. Установка значения <code>-1</code> позволит осуществлять неограниченный обмен.</p>
+                        <p class="text-muted small">Установите значение на <code>0</code> отключит пространство подкачки на этом сервере. Установите значение на <code>-1</code> позволит неограниченную подкачку.</p>
                     </div>
                 </div>
 
                 <div class="box-body row">
                     <div class="form-group col-xs-6">
-                        <label for="pDisk">Дисковое Пространство</label>
+                        <label for="pDisk">Размер диска</label>
 
                         <div class="input-group">
                             <input type="text" id="pDisk" name="disk" class="form-control" value="{{ old('disk') }}" />
-                            <span class="input-group-addon">МегаБайт</span>
+                            <span class="input-group-addon">MiB</span>
                         </div>
 
-                        <p class="text-muted small">Этому серверу не будет разрешено загружаться, если он использует больше этого объема пространства. Если сервер превысит это ограничение во время работы, он будет безопасно остановлен и заблокирован до тех пор, пока не освободится достаточно места. Установите значение <code>0</code>, чтобы разрешить неограниченное использование диска.</p>
+                        <p class="text-muted small">Этому серверу не будет разрешено загружаться, если он использует больше указанного объема пространства. Если сервер превысит этот предел во время работы, он будет безопасно остановлен и заблокирован до тех пор, пока не освободится достаточно места. Установите значение <code>0</code> чтобы разрешить неограниченное использование диска.</p>
                     </div>
 
                     <div class="form-group col-xs-6">
@@ -212,15 +207,15 @@
                             <input type="text" id="pIO" name="io" class="form-control" value="{{ old('io', 500) }}" />
                         </div>
 
-                        <p class="text-muted small"><strong>Подробно:</strong> Производительность ввода-вывода этого сервера по сравнению с другими <em>запущенными</em> контейнерами в системе. Значение должно быть между <code>10</code> и <code>1000 </code>. Пожалуйста, смотрите <a href="https://docs.docker.com/engine/reference/run/#/block-io-bandwidth-blkio-constraint "target="_blank"> эту документацию</a> для получения дополнительной информации об этом.</p>
+                        <p class="text-muted small"><strong>Расширенные</strong>: Производительность ввода-вывода этого сервера по сравнению с другими <em>работающими</em> контейнерами в системе. Значение должно быть между <code>10</code> и <code>1000</code>. Посмотрите <a href="https://docs.docker.com/engine/reference/run/#block-io-bandwidth-blkio-constraint" target="_blank">этот документ</a> для большей информации об этом.</p>
                     </div>
                     <div class="form-group col-xs-12">
                         <div class="checkbox checkbox-primary no-margin-bottom">
                             <input type="checkbox" id="pOomDisabled" name="oom_disabled" value="0" {{ \Pterodactyl\Helpers\Utilities::checked('oom_disabled', 0) }} />
-                            <label for="pOomDisabled" class="strong">Подключить OOM Убийцу</label>
+                            <label for="pOomDisabled" class="strong">Включить OOM Killer</label>
                         </div>
 
-                        <p class="small text-muted no-margin">Завершает работу сервера, если он нарушает ограничения памяти. Включение убийцы ООМ может привести к неожиданному завершению серверных процессов.</p>
+                        <p class="small text-muted no-margin">Завершает работу сервера, если он нарушает ограничения памяти. Включение OOM Killer может привести к неожиданному завершению серверных процессов.</p>
                     </div>
                 </div>
             </div>
@@ -231,12 +226,12 @@
         <div class="col-md-6">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Конфигурация ядер</h3>
+                    <h3 class="box-title">Конфигурация Nest</h3>
                 </div>
 
                 <div class="box-body row">
                     <div class="form-group col-xs-12">
-                        <label for="pNestId">Ядро</label>
+                        <label for="pNestId">Nest</label>
 
                         <select id="pNestId" name="nest_id" class="form-control">
                             @foreach($nests as $nest)
@@ -248,21 +243,21 @@
                             @endforeach
                         </select>
 
-                        <p class="small text-muted no-margin">Выберите ядро, в котором будет сгруппирован этот сервер.</p>
+                        <p class="small text-muted no-margin">Выберите Nest, в котором будет сгруппирован этот сервер.</p>
                     </div>
 
                     <div class="form-group col-xs-12">
-                        <label for="pEggId">Яйца</label>
+                        <label for="pEggId">Egg</label>
                         <select id="pEggId" name="egg_id" class="form-control"></select>
-                        <p class="small text-muted no-margin">Выберите яйца, которые будет определять, как должен работать этот сервер.</p>
+                        <p class="small text-muted no-margin">Выберите Egg, которое будет определять, как должен работать этот сервер.</p>
                     </div>
                     <div class="form-group col-xs-12">
                         <div class="checkbox checkbox-primary no-margin-bottom">
                             <input type="checkbox" id="pSkipScripting" name="skip_scripts" value="1" {{ \Pterodactyl\Helpers\Utilities::checked('skip_scripts', 0) }} />
-                            <label for="pSkipScripting" class="strong">Пропустить Скрипт Установки Яйца</label>
+                            <label for="pSkipScripting" class="strong">Пропустить установку Egg</label>
                         </div>
 
-                        <p class="small text-muted no-margin">Если к выбранному яйцу прикреплен сценарий установки, он будет запущен во время установки. Если вы хотите пропустить этот шаг, установите этот флажок.</p>
+                        <p class="small text-muted no-margin">Если к выбранному Egg прикреплен сценарий установки, этот сценарий будет запущен во время установки. Если вы хотите пропустить этот шаг, установите этот флажок.</p>
                     </div>
                 </div>
             </div>
@@ -271,15 +266,15 @@
         <div class="col-md-6">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Конфигурация Docker'a</h3>
+                    <h3 class="box-title">Конфигурация докера</h3>
                 </div>
 
                 <div class="box-body row">
                     <div class="form-group col-xs-12">
-                        <label for="pDefaultContainer">Образы Docker'a</label>
+                        <label for="pDefaultContainer">Докер-образ</label>
                         <select id="pDefaultContainer" name="image" class="form-control"></select>
-                        <input id="pDefaultContainerCustom" name="custom_image" value="{{ old('custom_image') }}" class="form-control" placeholder="Или введите пользовательский образ..." style="margin-top:1rem"/>
-                        <p class="small text-muted no-margin">Это образ настройки по умолчанию, который будет использоваться для запуска этого сервера. Выберите образ из раскрывающегося списка выше или введите пользовательское изображение в текстовое поле выше.</p>
+                        <input id="pDefaultContainerCustom" name="custom_image" value="{{ old('custom_image') }}" class="form-control" placeholder="Или введите собственное образ..." style="margin-top:1rem"/>
+                        <p class="small text-muted no-margin">Это образ Docker по умолчанию, который будет использоваться для запуска этого сервера. Выберите изображение из раскрывающегося списка выше или введите собственное изображение в текстовое поле выше.</p>
                     </div>
                 </div>
             </div>
@@ -295,14 +290,14 @@
 
                 <div class="box-body row">
                     <div class="form-group col-xs-12">
-                        <label for="pStartup">Команда запуска</label>
+                        <label for="pStartup">Команды запуска</label>
                         <input type="text" id="pStartup" name="startup" value="{{ old('startup') }}" class="form-control" />
-                        <p class="small text-muted no-margin">Для команды запуска доступны следующие заменители данных: <code>@{{SERVER_MEMORY}}</code>, <code>@{{SERVER_IP}}</code> и <code>@{{SERVER_PORT}} </code>. Они будут заменены выделенной памятью, IP-адресом сервера и портом сервера соответственно.</p>
+                        <p class="small text-muted no-margin">Для команды запуска доступны следующие замены данных: <code>@{{SERVER_MEMORY}}</code>, <code>@{{SERVER_IP}}</code>, и <code>@{{SERVER_PORT}}</code>. Они будут заменены выделенной памятью, IP-адресом и портом сервера соответственно.</p>
                     </div>
                 </div>
 
                 <div class="box-header with-border" style="margin-top:-10px;">
-                    <h3 class="box-title">Переменные службы</h3>
+                    <h3 class="box-title">Сервисные переменные</h3>
                 </div>
 
                 <div class="box-body row" id="appendVariablesTo"></div>
@@ -343,7 +338,7 @@
         // END Persist 'Service Variables'
     </script>
 
-    {!! Theme::js('js/admin/new-server.js?v=20201225') !!}
+    {!! Theme::js('js/admin/new-server.js?v=20220530') !!}
 
     <script type="application/javascript">
         $(document).ready(function() {

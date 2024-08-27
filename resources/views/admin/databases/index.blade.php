@@ -1,19 +1,14 @@
-{{-- Pterodactyl - Panel --}}
-{{-- Copyright (c) 2015 - 2017 Dane Everitt <dane@daneeveritt.com> --}}
-
-{{-- This software is licensed under the terms of the MIT license. --}}
-{{-- https://opensource.org/licenses/MIT --}}
 @extends('layouts.admin')
 
 @section('title')
-    Хосты баз данных
+    Database Hosts
 @endsection
 
 @section('content-header')
-    <h1>Хосты баз данных<small>Хосты баз данных, на которых могут быть созданы базы данных серверов.</small></h1>
+    <h1>Хосты базы данных<small> Хосты баз данных, на которых серверы могут создавать базы данных.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Администратор</a></li>
-        <li class="active">Хосты баз данных</li>
+        <li><a href="{{ route('admin.index') }}">Админ</a></li>
+        <li class="active">Хосты базы данных</li>
     </ol>
 @endsection
 
@@ -22,22 +17,22 @@
     <div class="col-xs-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Список хозяев</h3>
+                <h3 class="box-title">Список хостов</h3>
                 <div class="box-tools">
-                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#newHostModal">Создать новый</button>
+                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#newHostModal">Создавать новый</button>
                 </div>
             </div>
             <div class="box-body table-responsive no-padding">
                 <table class="table table-hover">
                     <tbody>
                         <tr>
-                            <th>Айди</th>
+                            <th>ID</th>
                             <th>Имя</th>
                             <th>Хост</th>
                             <th>Порт</th>
-                            <th>Имя пользователя</th>
-                            <th class="text-center">Базы данных</th>
-                            <th class="text-center">Узел</th>
+                            <th>Пользователь</th>
+                            <th class="text-center">База Данных</th>
+                            <th class="text-center">Нода</th>
                         </tr>
                         @foreach ($hosts as $host)
                             <tr>
@@ -51,7 +46,7 @@
                                     @if(! is_null($host->node))
                                         <a href="{{ route('admin.nodes.view', $host->node->id) }}">{{ $host->node->name }}</a>
                                     @else
-                                        <span class="label label-default">Нету</span>
+                                        <span class="label label-default">Нет</span>
                                     @endif
                                 </td>
                             </tr>
@@ -68,42 +63,42 @@
             <form action="{{ route('admin.databases') }}" method="POST">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Создайте новый хост базы данных</h4>
+                    <h4 class="modal-title">Создать новый хост базы данных</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="pName" class="form-label">Имя</label>
                         <input type="text" name="name" id="pName" class="form-control" />
-                        <p class="text-muted small">Короткий идентификатор, используемый для отличия данного места от других. Должно быть от 1 до 60 символов, например, <code>us.nyc.lvl3</code>.</p>
+                        <p class="text-muted small">Короткий идентификатор, используемый для отличия этого местоположения от других. Должно быть от 1 до 60 символов, например: <code>us.nyc.lvl3</code>.</p>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <label for="pHost" class="form-label">Хост</label>
                             <input type="text" name="host" id="pHost" class="form-control" />
-                            <p class="text-muted small">IP-адрес или FQDN, которые должны использоваться при попытке подключения к этому хосту MySQL <em>из панели</em> для добавления новых баз данных.</p>
+                            <p class="text-muted small">IP-адрес или полное доменное имя, которое следует использовать при попытке подключения к этому хосту MySQL <em>из панели</em> для добавления новых баз данных.</p>
                         </div>
                         <div class="col-md-6">
                             <label for="pPort" class="form-label">Порт</label>
                             <input type="text" name="port" id="pPort" class="form-control" value="3306"/>
-                            <p class="text-muted small">Порт, на котором работает MySQL на этом хосте.</p>
+                            <p class="text-muted small">Порт, на котором MySQL работает для этого хоста.</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="pUsername" class="form-label">Имя пользователя</label>
+                            <label for="pUsername" class="form-label">Пользователь</label>
                             <input type="text" name="username" id="pUsername" class="form-control" />
-                            <p class="text-muted small">Имя пользователя учетной записи, имеющей достаточно прав для создания новых пользователей и баз данных в системе.</p>
+                            <p class="text-muted small">Имя пользователя учетной записи, имеющей достаточные разрешения для создания новых пользователей и баз данных в системе.</p>
                         </div>
                         <div class="col-md-6">
                             <label for="pPassword" class="form-label">Пароль</label>
                             <input type="password" name="password" id="pPassword" class="form-control" />
-                            <p class="text-muted small">Пароль к заданной учетной записи.</p>
+                            <p class="text-muted small">Пароль к аккаунту определен.</p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="pNodeId" class="form-label">Связанный узел</label>
+                        <label for="pNodeId" class="form-label">Связанная нода</label>
                         <select name="node_id" id="pNodeId" class="form-control">
-                            <option value="">Нету</option>
+                            <option value="">Нет</option>
                             @foreach($locations as $location)
                                 <optgroup label="{{ $location->short }}">
                                     @foreach($location->nodes as $node)
@@ -112,11 +107,11 @@
                                 </optgroup>
                             @endforeach
                         </select>
-                        <p class="text-muted small">Этот параметр не делает ничего другого, кроме того, что при добавлении базы данных на сервер на выбранном узле по умолчанию используется этот узел базы данных.</p>
+                        <p class="text-muted small">Этот параметр не делает ничего, кроме значения по умолчанию для этого хоста базы данных при добавлении базы данных на сервер на выбранном узле.</p>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <p class="text-danger small text-left">Учетная запись, определенная для этого узла базы данных <strong>обязательно</strong> иметь <code>WITH GRANT OPTION</code> разрешение. Если определенная учетная запись не имеет этого разрешения, запросы на создание баз данных <em>будет</em> провалиться. <strong>Не используйте те же данные учетной записи для MySQL, которые вы определили для этой панели.</strong></p>
+                    <p class="text-danger small text-left">Учетная запись, определенная для этого хоста базы данных <strong>должна</strong> иметь <code>WITH GRANT OPTION</code> разрешение. Если определенная учетная запись не имеет этого разрешения, запросы на создание баз данных <em>не будут</em> выполнены. <strong>Не используйте те же данные учетной записи MySQL, которые вы определили для этой панели.</strong></p>
                     {!! csrf_field() !!}
                     <button type="button" class="btn btn-default btn-sm pull-left" data-dismiss="modal">Отмена</button>
                     <button type="submit" class="btn btn-success btn-sm">Создать</button>

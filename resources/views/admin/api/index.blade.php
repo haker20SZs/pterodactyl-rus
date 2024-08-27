@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    API приложений
+    Application API
 @endsection
 
 @section('content-header')
-    <h1>Аппликация API<small>Управляйте учетными данными доступа для управления этой панелью через API.</small></h1>
+    <h1>API приложения<small> Контролируйте учетные данные доступа для управления этой панелью через API.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Администратор</a></li>
-        <li class="active">API приложений</li>
+        <li><a href="{{ route('admin.index') }}">Админ</a></li>
+        <li class="active">API приложения</li>
     </ol>
 @endsection
 
@@ -17,18 +17,18 @@
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Список полномочий</h3>
+                    <h3 class="box-title">Список API</h3>
                     <div class="box-tools">
-                        <a href="{{ route('admin.api.new') }}" class="btn btn-sm btn-primary">Создать новый</a>
+                        <a href="{{ route('admin.api.new') }}" class="btn btn-sm btn-primary">Создать Новое</a>
                     </div>
                 </div>
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
                         <tr>
                             <th>Ключ</th>
-                            <th>Памятка</th>
+                            <th>Описание</th>
                             <th>Последнее использование</th>
-                            <th>Создано</th>
+                            <th>Создан</th>
                             <th></th>
                         </tr>
                         @foreach($keys as $key)
@@ -67,11 +67,11 @@
                 swal({
                     type: 'error',
                     title: 'Отозвать ключ API',
-                    text: 'После отзыва этого API-ключа все приложения, использующие его в данный момент, перестанут работать.',
+                    text: 'Как только этот ключ API будет отозван, все приложения, использующие его в настоящее время, перестанут работать.',
                     showCancelButton: true,
                     allowOutsideClick: true,
                     closeOnConfirm: false,
-                    confirmButtonText: 'Отменить',
+                    confirmButtonText: 'Отозвать',
                     confirmButtonColor: '#d9534f',
                     showLoaderOnConfirm: true
                 }, function () {
@@ -85,7 +85,7 @@
                         swal({
                             type: 'success',
                             title: '',
-                            text: 'Ключ API был отозван.'
+                            text: 'Ключ API отозван.'
                         });
                         self.parent().parent().slideUp();
                     }).fail(function (jqXHR) {
@@ -93,7 +93,7 @@
                         swal({
                             type: 'error',
                             title: 'Упс!',
-                            text: 'При попытке отозвать этот ключ произошла ошибка.'
+                            text: 'Произошла ошибка при попытке отозвать этот ключ.'
                         });
                     });
                 });

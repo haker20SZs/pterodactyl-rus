@@ -5,10 +5,10 @@
 @endsection
 
 @section('content-header')
-    <h1>{{ $node->name }}<small>Все сервера, которые созданны на этой ноде.</small></h1>
+    <h1>{{ $node->name }}<small>Все серверы, назначенные на данный момент этому узлу.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Администрация</a></li>
-        <li><a href="{{ route('admin.nodes') }}">Ноды</a></li>
+        <li><a href="{{ route('admin.index') }}">Админ</a></li>
+        <li><a href="{{ route('admin.nodes') }}">Узел</a></li>
         <li><a href="{{ route('admin.nodes.view', $node->id) }}">{{ $node->name }}</a></li>
         <li class="active">Сервера</li>
     </ol>
@@ -22,7 +22,7 @@
                 <li><a href="{{ route('admin.nodes.view', $node->id) }}">Информация</a></li>
                 <li><a href="{{ route('admin.nodes.view.settings', $node->id) }}">Настройки</a></li>
                 <li><a href="{{ route('admin.nodes.view.configuration', $node->id) }}">Конфигурация</a></li>
-                <li><a href="{{ route('admin.nodes.view.allocation', $node->id) }}">Расположения</a></li>
+                <li><a href="{{ route('admin.nodes.view.allocation', $node->id) }}">Распределения</a></li>
                 <li class="active"><a href="{{ route('admin.nodes.view.servers', $node->id) }}">Сервера</a></li>
             </ul>
         </div>
@@ -32,7 +32,7 @@
     <div class="col-sm-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Менеджер серверов</h3>
+                <h3 class="box-title">Менеджер процессов</h3>
             </div>
             <div class="box-body table-responsive no-padding">
                 <table class="table table-hover">
@@ -40,20 +40,14 @@
                         <th>ID</th>
                         <th>Имя сервера</th>
                         <th>Владелец</th>
-                        <th>Память</th>
-                        <th>CPU</th>
-                        <th>Место на диске</th>
-                        <th>Яйцо</th>
+                        <th>Услуга</th>
                     </tr>
                     @foreach($servers as $server)
                         <tr data-server="{{ $server->uuid }}">
                             <td><code>{{ $server->uuidShort }}</code></td>
                             <td><a href="{{ route('admin.servers.view', $server->id) }}">{{ $server->name }}</a></td>
                             <td><a href="{{ route('admin.users.view', $server->owner_id) }}">{{ $server->user->username }}</a></td>
-                            <td><code title="{{ $server->memory }}">{{ $server->memory }}МБ</code></td>
-                            <td><code title="{{ $server->cpu }}">{{ $server->cpu }}%</code></td>
-                            <td><code title="{{ $server->disk }}">{{ round($server->disk/1024, 2, PHP_ROUND_HALF_DOWN) }}ГБ</code></td>
-                            <td>{{ $server->egg->name }}</td>
+                            <td>{{ $server->nest->name }} ({{ $server->egg->name }})</td>
                         </tr>
                     @endforeach
                 </table>

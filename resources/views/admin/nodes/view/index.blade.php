@@ -1,8 +1,3 @@
-{{-- Pterodactyl - Panel --}}
-{{-- Copyright (c) 2015 - 2017 Dane Everitt <dane@daneeveritt.com> --}}
-
-{{-- This software is licensed under the terms of the MIT license. --}}
-{{-- https://opensource.org/licenses/MIT --}}
 @extends('layouts.admin')
 
 @section('title')
@@ -10,10 +5,10 @@
 @endsection
 
 @section('content-header')
-    <h1>{{ $node->name }}<small>Краткий обзор ноды.</small></h1>
+    <h1>{{ $node->name }}<small>Краткий обзор вашего узла.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Администрация</a></li>
-        <li><a href="{{ route('admin.nodes') }}">Ноды</a></li>
+        <li><a href="{{ route('admin.index') }}">Админ</a></li>
+        <li><a href="{{ route('admin.nodes') }}">Узел</a></li>
         <li class="active">{{ $node->name }}</li>
     </ol>
 @endsection
@@ -26,7 +21,7 @@
                 <li class="active"><a href="{{ route('admin.nodes.view', $node->id) }}">Информация</a></li>
                 <li><a href="{{ route('admin.nodes.view.settings', $node->id) }}">Настройки</a></li>
                 <li><a href="{{ route('admin.nodes.view.configuration', $node->id) }}">Конфигурация</a></li>
-                <li><a href="{{ route('admin.nodes.view.allocation', $node->id) }}">Расположения</a></li>
+                <li><a href="{{ route('admin.nodes.view.allocation', $node->id) }}">Распределения</a></li>
                 <li><a href="{{ route('admin.nodes.view.servers', $node->id) }}">Сервера</a></li>
             </ul>
         </div>
@@ -38,20 +33,20 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Информация о ноде</h3>
+                        <h3 class="box-title">Информация</h3>
                     </div>
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
                             <tr>
-                                <td>Версия Daemon'а</td>
-                                <td><code data-attr="info-version"><i class="fa fa-refresh fa-fw fa-spin"></i></code> (Latest: <code>{{ $version->getDaemon() }}</code>)</td>
+                                <td>Версия Демона</td>
+                                <td><code data-attr="info-version"><i class="fa fa-refresh fa-fw fa-spin"></i></code> (Последяя: <code>{{ $version->getDaemon() }}</code>)</td>
                             </tr>
                             <tr>
-                                <td>О системе</td>
+                                <td>Системная информация</td>
                                 <td data-attr="info-system"><i class="fa fa-refresh fa-fw fa-spin"></i></td>
                             </tr>
                             <tr>
-                                <td>Всего ядер ЦПУ</td>
+                                <td>Всего потоков ЦП</td>
                                 <td data-attr="info-cpus"><i class="fa fa-refresh fa-fw fa-spin"></i></td>
                             </tr>
                         </table>
@@ -62,7 +57,7 @@
                 <div class="col-xs-12">
                     <div class="box box-default">
                         <div class="box-header with-border">
-                            Description
+                            Описание
                         </div>
                         <div class="box-body table-responsive">
                             <pre>{{ $node->description }}</pre>
@@ -73,16 +68,16 @@
             <div class="col-xs-12">
                 <div class="box box-danger">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Удалить ноду</h3>
+                        <h3 class="box-title">Удалить Узел</h3>
                     </div>
                     <div class="box-body">
-                        <p class="no-margin">Удаление ноды является необратимым действием и немедленно удалит ее с панели. Для продолжения работы с этой нодой не должно быть серверов, связанных с ней.</p>
+                        <p class="no-margin">Удаление узла является необратимым действием и приведет к немедленному удалению этого узла с панели. Чтобы продолжить, с этим узлом не должно быть связано ни одного сервера.</p>
                     </div>
                     <div class="box-footer">
                         <form action="{{ route('admin.nodes.view.delete', $node->id) }}" method="POST">
                             {!! csrf_field() !!}
                             {!! method_field('DELETE') !!}
-                            <button type="submit" class="btn btn-danger btn-sm pull-right" {{ ($node->servers_count < 1) ?: 'disabled' }}>Да, удалить эту ноду</button>
+                            <button type="submit" class="btn btn-danger btn-sm pull-right" {{ ($node->servers_count < 1) ?: 'disabled' }}>Да, удалить этот узел</button>
                         </form>
                     </div>
                 </div>
@@ -92,17 +87,17 @@
     <div class="col-sm-4">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Сведения</h3>
+                <h3 class="box-title">Быстрый Обзор</h3>
             </div>
             <div class="box-body">
                 <div class="row">
                     @if($node->maintenance_mode)
                     <div class="col-sm-12">
-                        <div class="info-box bg-grey">
+                        <div class="info-box bg-orange">
                             <span class="info-box-icon"><i class="ion ion-wrench"></i></span>
                             <div class="info-box-content" style="padding: 23px 10px 0;">
-                                <span class="info-box-text">This node is under</span>
-                                <span class="info-box-number">Maintenance</span>
+                                <span class="info-box-text">Этот узел находится под</span>
+                                <span class="info-box-number">Обслуживанием</span>
                             </div>
                         </div>
                     </div>
@@ -111,8 +106,8 @@
                         <div class="info-box bg-{{ $stats['disk']['css'] }}">
                             <span class="info-box-icon"><i class="ion ion-ios-folder-outline"></i></span>
                             <div class="info-box-content" style="padding: 15px 10px 0;">
-                                <span class="info-box-text">Дисковое пространство</span>
-                                <span class="info-box-number">{{ $stats['disk']['value'] }} / {{ $stats['disk']['max'] }} Mb</span>
+                                <span class="info-box-text">Выделенное дисковое пространство</span>
+                                <span class="info-box-number">{{ $stats['disk']['value'] }} / {{ $stats['disk']['max'] }} MiB</span>
                                 <div class="progress">
                                     <div class="progress-bar" style="width: {{ $stats['disk']['percent'] }}%"></div>
                                 </div>
@@ -123,8 +118,8 @@
                         <div class="info-box bg-{{ $stats['memory']['css'] }}">
                             <span class="info-box-icon"><i class="ion ion-ios-barcode-outline"></i></span>
                             <div class="info-box-content" style="padding: 15px 10px 0;">
-                                <span class="info-box-text">Используется ОЗУ</span>
-                                <span class="info-box-number">{{ $stats['memory']['value'] }} / {{ $stats['memory']['max'] }} Mb</span>
+                                <span class="info-box-text">Выделенная память</span>
+                                <span class="info-box-number">{{ $stats['memory']['value'] }} / {{ $stats['memory']['max'] }} MiB</span>
                                 <div class="progress">
                                     <div class="progress-bar" style="width: {{ $stats['memory']['percent'] }}%"></div>
                                 </div>
@@ -135,7 +130,7 @@
                         <div class="info-box bg-blue">
                             <span class="info-box-icon"><i class="ion ion-social-buffer-outline"></i></span>
                             <div class="info-box-content" style="padding: 23px 10px 0;">
-                                <span class="info-box-text">Всего серверов</span>
+                                <span class="info-box-text">Всего Серверов</span>
                                 <span class="info-box-number">{{ $node->servers_count }}</span>
                             </div>
                         </div>

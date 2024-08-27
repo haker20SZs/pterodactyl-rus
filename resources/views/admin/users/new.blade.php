@@ -1,18 +1,13 @@
-{{-- Pterodactyl - Panel --}}
-{{-- Copyright (c) 2015 - 2017 Dane Everitt <dane@daneeveritt.com> --}}
-
-{{-- This software is licensed under the terms of the MIT license. --}}
-{{-- https://opensource.org/licenses/MIT --}}
 @extends('layouts.admin')
 
 @section('title')
-    Создать польззователя
+    Создать пользователя
 @endsection
 
 @section('content-header')
-    <h1>Добавить пользователя <small>Зарегистрировать пользователя в системе.</small></h1>
+    <h1>Создать пользователя<small>Добавить нового пользователя в систему.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Администрация</a></li>
+        <li><a href="{{ route('admin.index') }}">Админ</a></li>
         <li><a href="{{ route('admin.users') }}">Пользователи</a></li>
         <li class="active">Создать</li>
     </ol>
@@ -24,11 +19,11 @@
         <div class="col-md-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Идентификация</h3>
+                    <h3 class="box-title">Личность</h3>
                 </div>
                 <div class="box-body">
                     <div class="form-group">
-                        <label for="email" class="control-label">Почта</label>
+                        <label for="email" class="control-label">Email</label>
                         <div>
                             <input type="text" autocomplete="off" name="email" value="{{ old('email') }}" class="form-control" />
                         </div>
@@ -40,18 +35,30 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="name_first" class="control-label">Имя клиента</label>
+                        <label for="name_first" class="control-label">Имя</label>
                         <div>
                             <input type="text" autocomplete="off" name="name_first" value="{{ old('name_first') }}" class="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="name_last" class="control-label">Фамилия клиента</label>
+                        <label for="name_last" class="control-label">Фамилия</label>
                         <div>
                             <input type="text" autocomplete="off" name="name_last" value="{{ old('name_last') }}" class="form-control" />
                         </div>
                     </div>
+
                     <div class="form-group">
+                        <label for="root_admin" class="control-label">Администратор</label>
+                        <div>
+                            <select name="root_admin" class="form-control">
+                                <option value="0">@lang('strings.no')</option>
+                                <option value="1">@lang('strings.yes')</option>
+                            </select>
+                            <p class="text-muted"><small>Установка значения «Да» дает пользователю полный административный доступ.</small></p>
+                        </div>
+                    </div>
+
+                    <!--<div class="form-group">
                         <label class="control-label">Язык по умолчанию</label>
                         <div>
                             <select name="language" class="form-control">
@@ -62,6 +69,8 @@
                             <p class="text-muted"><small>Язык по умолчанию, используемый при отображении панели для этого пользователя.</small></p>
                         </div>
                     </div>
+                    -->
+
                 </div>
                 <div class="box-footer">
                     {!! csrf_field() !!}
@@ -72,30 +81,11 @@
         <div class="col-md-6">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Права</h3>
-                </div>
-                <div class="box-body">
-                    <div class="form-group col-md-12">
-                        <label for="root_admin" class="control-label">Администратор</label>
-                        <div>
-                            <select name="root_admin" class="form-control">
-                                <option value="0">@lang('strings.no')</option>
-                                <option value="1">@lang('strings.yes')</option>
-                            </select>
-                            <p class="text-muted"><small>Установите значение 'Да', если хотите выдать пользователю права администратора.</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="box">
-                <div class="box-header with-border">
                     <h3 class="box-title">Пароль</h3>
                 </div>
                 <div class="box-body">
                     <div class="alert alert-info">
-                        <p>Указание данных в этом поле необязательно. Новые пользователи будут получать электронные письма, если настроена их отправка, они получат в нём пароль. Если здесь указан пароль, вам нужно будет найти другой способ его предоставления пользователю.</p>
+                        <p>Предоставление пароля пользователя не является обязательным. В электронных письмах новых пользователей пользователям предлагается создать пароль при первом входе в систему. Если здесь указан пароль, вам придется найти другой способ предоставления его пользователю.</p>
                     </div>
                     <div id="gen_pass" class=" alert alert-success" style="display:none;margin-bottom: 10px;"></div>
                     <div class="form-group">

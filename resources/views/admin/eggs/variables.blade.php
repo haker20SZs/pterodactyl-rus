@@ -1,19 +1,14 @@
-{{-- Pterodactyl - Panel --}}
-{{-- Copyright (c) 2015 - 2017 Dane Everitt <dane@daneeveritt.com> --}}
-
-{{-- This software is licensed under the terms of the MIT license. --}}
-{{-- https://opensource.org/licenses/MIT --}}
 @extends('layouts.admin')
 
 @section('title')
-    Яйцо &rarr; {{ $egg->name }} &rarr; Переменные
+    Ядро &rarr; {{ $egg->name }} &rarr; Переменные
 @endsection
 
 @section('content-header')
-    <h1>{{ $egg->name }}<small>Управляющие переменные для этого яйца.</small></h1>
+    <h1>{{ $egg->name }}<small>Управление переменными для этого ядра.</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Администратор</a></li>
-        <li><a href="{{ route('admin.nests') }}">Гнезда</a></li>
+        <li><a href="{{ route('admin.index') }}">Админ</a></li>
+        <li><a href="{{ route('admin.nests') }}">Серсив</a></li>
         <li><a href="{{ route('admin.nests.view', $egg->nest->id) }}">{{ $egg->nest->name }}</a></li>
         <li><a href="{{ route('admin.nests.egg.view', $egg->id) }}">{{ $egg->name }}</a></li>
         <li class="active">Переменные</li>
@@ -27,7 +22,7 @@
             <ul class="nav nav-tabs">
                 <li><a href="{{ route('admin.nests.egg.view', $egg->id) }}">Конфигурация</a></li>
                 <li class="active"><a href="{{ route('admin.nests.egg.variables', $egg->id) }}">Переменные</a></li>
-                <li><a href="{{ route('admin.nests.egg.scripts', $egg->id) }}">Установить скрипт</a></li>
+                <li><a href="{{ route('admin.nests.egg.scripts', $egg->id) }}">Установка скрипта</a></li>
             </ul>
         </div>
     </div>
@@ -51,7 +46,7 @@
                 <form action="{{ route('admin.nests.egg.variables.edit', ['egg' => $egg->id, 'variable' => $variable->id]) }}" method="POST">
                     <div class="box-body">
                         <div class="form-group">
-                            <label class="form-label">Имя</label>
+                            <label class="form-label">Название</label>
                             <input type="text" name="name" value="{{ $variable->name }}" class="form-control" />
                         </div>
                         <div class="form-group">
@@ -68,7 +63,7 @@
                                 <input type="text" name="default_value" value="{{ $variable->default_value }}" class="form-control" />
                             </div>
                             <div class="col-xs-12">
-                                <p class="text-muted small">Доступ к этой переменной можно получить в команде запуска с помощью <code>{{ $variable->env_variable }}</code>.</p>
+                                <p class="text-muted small">Доступ к этой переменной можно получить в команде запуска, используя <code>{{ $variable->env_variable }}</code>.</p>
                             </div>
                         </div>
                         <div class="form-group">
@@ -81,7 +76,7 @@
                         <div class="form-group">
                             <label class="form-label">Правила ввода</label>
                             <input type="text" name="rules" class="form-control" value="{{ $variable->rules }}" />
-                            <p class="text-muted small">Эти правила определяются с помощью стандартных <a href="https://laravel.com/docs/5.7/validation#available-validation-rules" target="_blank">Правила валидации Laravel Framework</a>.</p>
+                            <p class="text-muted small">Эти правила определяются с использованием стандартных <a href="https://laravel.com/docs/5.7/validation#available-validation-rules" target="_blank">Правила проверки Laravel Framework</a>.</p>
                         </div>
                     </div>
                     <div class="box-footer">
@@ -99,12 +94,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Создать новую переменную яйца</h4>
+                <h4 class="modal-title">Создать новую переменную ядра</h4>
             </div>
             <form action="{{ route('admin.nests.egg.variables', $egg->id) }}" method="POST">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="control-label">Имя <span class="field-required"></span></label>
+                        <label class="control-label">Название <span class="field-required"></span></label>
                         <input type="text" name="name" class="form-control" value="{{ old('name') }}"/>
                     </div>
                     <div class="form-group">
@@ -134,7 +129,7 @@
                     <div class="form-group">
                         <label class="control-label">Правила ввода <span class="field-required"></span></label>
                         <input type="text" name="rules" class="form-control" value="{{ old('rules', 'required|string|max:20') }}" placeholder="required|string|max:20" />
-                        <p class="text-muted small">Эти правила определяются с помощью стандартных <a href="https://laravel.com/docs/5.7/validation#available-validation-rules" target="_blank">Правила валидации Laravel Framework</a>.</p>
+                        <p class="text-muted small">Эти правила определяются с использованием стандартных <a href="https://laravel.com/docs/5.7/validation#available-validation-rules" target="_blank">Правила проверки Laravel Framework</a>.</p>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -153,7 +148,7 @@
     <script>
         $('.pOptions').select2();
         $('[data-action="delete"]').on('mouseenter', function (event) {
-            $(this).find('i').html(' Delete Variable');
+            $(this).find('i').html(' Удалить переменную');
         }).on('mouseleave', function (event) {
             $(this).find('i').html('');
         });
