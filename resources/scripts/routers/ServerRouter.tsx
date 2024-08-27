@@ -16,6 +16,7 @@ import Sidebar from '@/components/elements/Sidebar';
 import tw from 'twin.macro';
 import SwitchWrapperDiv from '@/components/elements/SwitchWrapperDiv';
 import { ExternalLinkIcon } from '@heroicons/react/solid';
+import { CloudIcon } from '@heroicons/react/solid';
 import { useLocation } from 'react-router';
 import ConflictStateRenderer from '@/components/server/ConflictStateRenderer';
 import PermissionRoute from '@/components/elements/PermissionRoute';
@@ -106,9 +107,12 @@ export default () => {
                                         </NavLink>
                                     )
                                 )}
+                                <a href={`https://bd.whost.su/`} target={'_blank'} rel='noreferrer'>
+                                    <CloudIcon /> <span>Открыть PHPMyAdmin</span>
+                                </a>
                             {rootAdmin && (
                                 <a href={`/admin/servers/view/${serverId}`} target={'_blank'} rel='noreferrer'>
-                                    <ExternalLinkIcon /> <span>Open Admin Panel</span>
+                                    <ExternalLinkIcon /> <span>Открыть админ панель</span>
                                 </a>
                             )}
                         </Sidebar>
