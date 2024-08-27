@@ -125,12 +125,12 @@ export default ({ server, className }: { server: Server; className?: string }) =
                         <div css={tw`flex-1 text-center`}>
                             <span css={tw`bg-zinc-600 rounded px-2 py-1 text-zinc-100 text-xs`}>
                                 {server.isTransferring
-                                    ? 'Transferring'
+                                    ? 'Передача'
                                     : server.status === 'installing'
-                                    ? 'Installing'
+                                    ? 'Установка'
                                     : server.status === 'restoring_backup'
-                                    ? 'Restoring Backup'
-                                    : 'Unavailable'}
+                                    ? 'Восстановление резервной копии'
+                                    : 'Недоступно'}
                             </span>
                         </div>
                     ) : (
