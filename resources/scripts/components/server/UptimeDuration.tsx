@@ -10,14 +10,14 @@ export default ({ uptime }: { uptime: number }) => {
     if (days > 0) {
         return (
             <>
-                {days}д {hours}ч {minutes}м
+                {days} дней {hours} часов {minutes} минут
             </>
         );
     }
 
     return (
         <>
-            {hours}ч {minutes}м {seconds}с
+            {hours} часов {minutes} минут {seconds} секунд
         </>
     );
 };
