@@ -48,7 +48,7 @@ export default ({ subuser }: Props) => {
                     <Can action={'user.update'}>
                         <button
                             type={'button'}
-                            aria-label={'Edit subuser'}
+                            aria-label={'Редактировать подпользователя'}
                             css={tw`block text-sm p-1 md:p-2 text-zinc-600 hover:text-zinc-900 dark:(text-zinc-500 hover:text-zinc-100) transition-colors duration-150 mx-4`}
                             onClick={() => setVisible(true)}
                         >
