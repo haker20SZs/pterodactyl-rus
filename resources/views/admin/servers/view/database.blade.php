@@ -158,7 +158,7 @@
             }
             swal({
                 type: 'error',
-                title: 'УПС!',
+                title: 'Упс!',
                 text: error
             });
         }).always(function () {

@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 
 @section('title')
-    Server — {{ $server->name }}: Build Details
+    Server — {{ $server->name }}: Подробности сборки
 @endsection
 
 @section('content-header')
-    <h1>{{ $server->name }}<small>Control allocations and system resources for this server.</small></h1>
+    <h1>{{ $server->name }}<small>Управление распределением и системными ресурсами для этого сервера.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">Админ</a></li>
         <li><a href="{{ route('admin.servers') }}">Сервера</a></li>

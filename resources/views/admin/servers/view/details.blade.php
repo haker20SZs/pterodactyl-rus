@@ -1,16 +1,16 @@
 @extends('layouts.admin')
 
 @section('title')
-    Server — {{ $server->name }}: Details
+    Server — {{ $server->name }}: Подробности
 @endsection
 
 @section('content-header')
-    <h1>{{ $server->name }}<small>Edit details for this server including owner and container.</small></h1>
+    <h1>{{ $server->name }}<small>Редактирование сведений об этом сервере, включая владельца и контейнер.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">Админ</a></li>
         <li><a href="{{ route('admin.servers') }}">Сервера</a></li>
         <li><a href="{{ route('admin.servers.view', $server->id) }}">{{ $server->name }}</a></li>
-        <li class="active">Details</li>
+        <li class="active">Подробности</li>
     </ol>
 @endsection
 

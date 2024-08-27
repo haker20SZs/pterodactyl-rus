@@ -48,11 +48,11 @@
                 <div class="box-body row">
                     <div class="col-xs-12">
                         <p class="small text-danger">
-                            Changing any of the below values will result in the server processing a re-install command. The server will be stopped and will then proceed.
-                            If you would like the service scripts to not run, ensure the box is checked at the bottom.
+                            Изменение любого из перечисленных ниже значений приведет к тому, что сервер обработает команду переустановки. Сервер будет остановлен, а затем продолжит работу.
+                            Если вы хотите, чтобы служебные сценарии не запускались, убедитесь, что в нижней части установлен флажок.
                         </p>
                         <p class="small text-danger">
-                            <strong>This is a destructive operation in many cases. This server will be stopped immediately in order for this action to proceed.</strong>
+                            <strong>Во многих случаях это разрушительная операция. Для выполнения этого действия сервер будет немедленно остановлен.</strong>
                         </p>
                     </div>
                     <div class="form-group col-xs-12">
@@ -136,7 +136,7 @@
             }
 
             if (!_.get(objectChain, 'startup', false)) {
-                $('#pDefaultStartupCommand').val(_.get(parentChain, 'startup', 'ERROR: Startup Not Defined!'));
+                $('#pDefaultStartupCommand').val(_.get(parentChain, 'startup', 'Ошибка: Стартап не определен!'));
             } else {
                 $('#pDefaultStartupCommand').val(_.get(objectChain, 'startup'));
             }

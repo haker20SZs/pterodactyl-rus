@@ -196,7 +196,7 @@ export default ({ style, initialContent, filename, mode, fetchContent, onContent
 
     useEffect(() => {
         if (!editor) {
-            fetchContent(() => Promise.reject(new Error('сеанс редактора не был настроен')));
+            fetchContent(() => Promise.reject(new Error('Сеанс редактора не был настроен')));
             return;
         }
 

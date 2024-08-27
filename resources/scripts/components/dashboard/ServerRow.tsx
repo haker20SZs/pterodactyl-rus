@@ -84,9 +84,9 @@ export default ({ server, className }: { server: Server; className?: string }) =
         alarms.disk = server.limits.disk === 0 ? false : isAlarmState(stats.diskUsageInBytes, server.limits.disk);
     }
 
-    const diskLimit = server.limits.disk !== 0 ? bytesToString(mbToBytes(server.limits.disk)) : 'Unlimited';
-    const memoryLimit = server.limits.memory !== 0 ? bytesToString(mbToBytes(server.limits.memory)) : 'Unlimited';
-    const cpuLimit = server.limits.cpu !== 0 ? server.limits.cpu + ' %' : 'Unlimited';
+    const diskLimit = server.limits.disk !== 0 ? bytesToString(mbToBytes(server.limits.disk)) : 'Без лимита';
+    const memoryLimit = server.limits.memory !== 0 ? bytesToString(mbToBytes(server.limits.memory)) : 'Без лимита';
+    const cpuLimit = server.limits.cpu !== 0 ? server.limits.cpu + ' %' : 'Без лимита';
 
     return (
         <StatusIndicatorBox as={Link} to={`/server/${server.id}`} className={className} $status={stats?.status}>
@@ -125,12 +125,12 @@ export default ({ server, className }: { server: Server; className?: string }) =
                         <div css={tw`flex-1 text-center`}>
                             <span css={tw`bg-zinc-600 rounded px-2 py-1 text-zinc-100 text-xs`}>
                                 {server.isTransferring
-                                    ? 'Передача'
+                                    ? 'Transferring'
                                     : server.status === 'installing'
-                                    ? 'Установка'
+                                    ? 'Installing'
                                     : server.status === 'restoring_backup'
-                                    ? 'Восстановление резервной копии'
-                                    : 'Недоступно'}
+                                    ? 'Restoring Backup'
+                                    : 'Unavailable'}
                             </span>
                         </div>
                     ) : (

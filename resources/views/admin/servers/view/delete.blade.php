@@ -5,7 +5,7 @@
 @endsection
 
 @section('content-header')
-    <h1>{{ $server->name }}<small>Delete this server from the panel.</small></h1>
+    <h1>{{ $server->name }}<small>Удалите этот сервер из панели.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">Админ</a></li>
         <li><a href="{{ route('admin.servers') }}">Сервера</a></li>

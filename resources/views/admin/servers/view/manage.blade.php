@@ -32,7 +32,7 @@
                             <button type="submit" class="btn btn-danger">Переустановить сервер</button>
                         </form>
                     @else
-                        <button class="btn btn-danger disabled">Сервер должен быть установлен правильно для переустановки</button>
+                        <button class="btn btn-danger disabled">Сервер должен быть установлен<br>правильно для переустановки</button>
                     @endif
                 </div>
             </div>

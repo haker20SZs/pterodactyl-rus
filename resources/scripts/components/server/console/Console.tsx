@@ -20,7 +20,7 @@ import 'xterm/css/xterm.css';
 import styles from './style.module.css';
 
 const settings = {
-  prefix: '\x1B[33m\x1B[1m[WHOST]:\x1B[39m',
+  prefix: '\x1B[33m\x1B[1m[WHOST]:\x1B[39m ',
   diskusagecheck: 'Проверка использования дискового пространства на сервере, это может занять несколько секунд...',
   processconfiguration: 'Обновление файлов конфигурации процесса...',
   permcheck: 'Убедитесь, что права доступа к файлам установлены правильно, это может занять несколько секунд...',

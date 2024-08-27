@@ -71,6 +71,7 @@
                         </div>
                     </div>
                     -->
+                    
                 </div>
                 <div class="box-footer">
                     {!! csrf_field() !!}
