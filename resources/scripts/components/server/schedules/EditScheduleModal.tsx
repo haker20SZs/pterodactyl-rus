@@ -95,7 +95,7 @@ const EditScheduleModal = ({ schedule }: Props) => {
                     <Field
                         name={'name'}
                         label={'Название расписания'}
-                        description={'Человекочитаемый идентификатор для этого расписания.'}
+                        description={'Удобочитаемый идентификатор этого расписания.'}
                     />
                     <div css={tw`grid grid-cols-2 sm:grid-cols-5 gap-4 mt-6`}>
                         <Field name={'minute'} label={'Минута'} />
