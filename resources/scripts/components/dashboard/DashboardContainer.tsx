@@ -49,7 +49,7 @@ export default () => {
     }, [error]);
 
     return (
-        <PageContentBlock title={'Приборная панель'} showFlashKey={'dashboard'}>
+        <PageContentBlock title={'Главная страница'} showFlashKey={'dashboard'}>
             {rootAdmin && (
                 <div css={tw`mb-2 flex justify-end items-center`}>
                     <p css={tw`uppercase text-xs text-zinc-600 dark:text-zinc-400 mr-2`}>
