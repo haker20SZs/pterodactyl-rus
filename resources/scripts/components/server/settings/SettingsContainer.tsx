@@ -57,14 +57,14 @@ export default () => {
                             </div>
                         </TitledGreyBox>
                     </Can>
-                    <TitledGreyBox title={'Информация об отладке'} css={tw`mb-6 md:mb-10`}>
+                    <TitledGreyBox title={'Информация об узле'} css={tw`mb-6 md:mb-10`}>
                         <div css={tw`flex items-center justify-between text-sm`}>
                             <p>Узел</p>
                             <code css={tw`font-mono border bg-zinc-300 border-zinc-500 dark:bg-zinc-900 rounded py-1 px-2`}>{node}</code>
                         </div>
                         <CopyOnClick text={uuid}>
                             <div css={tw`flex items-center justify-between mt-2 text-sm`}>
-                                <p>Сервер айди</p>
+                                <p>Айди сервера</p>
                                 <code css={tw`font-mono border bg-zinc-300 border-zinc-500 dark:bg-zinc-900 rounded py-1 px-2`}>{uuid}</code>
                             </div>
                         </CopyOnClick>

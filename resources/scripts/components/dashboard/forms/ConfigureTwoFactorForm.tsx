@@ -37,9 +37,9 @@ export default () => {
             </p>
             <div css={tw`mt-6`}>
                 {isEnabled ? (
-                    <Button.Danger onClick={() => setVisible('disable')}>Отключить двухступенчатый режим</Button.Danger>
+                    <Button.Danger onClick={() => setVisible('disable')}>Отключить двухэтапную аутентификацию</Button.Danger>
                 ) : (
-                    <Button onClick={() => setVisible('enable')}>Включить двухступенчатый режим</Button>
+                    <Button onClick={() => setVisible('enable')}>Включить двухэтапную аутентификацию</Button>
                 )}
             </div>
         </div>

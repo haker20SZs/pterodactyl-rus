@@ -152,7 +152,7 @@ export default {
         {
             path: '/startup',
             permission: 'startup.*',
-            name: 'Стартап',
+            name: 'Параметры запуска',
             icon: LightningBoltIcon,
             component: StartupContainer,
         },
