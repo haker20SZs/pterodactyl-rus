@@ -27,7 +27,7 @@ return [
         ],
         'api-key' => [
             'create' => 'Создан новый API-ключ :identifier',
-            'delete' => 'Удален API-ключ идентификатор',
+            'delete' => 'Удален API-ключ идентификатора',
         ],
         'ssh-key' => [
             'create' => 'Добавил SSH-ключ :fingerprint к аккаунту',
