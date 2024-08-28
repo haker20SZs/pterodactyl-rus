@@ -58,7 +58,7 @@
                         </div>
                     </div>
 
-                    <!--<div class="form-group">
+                    <div class="form-group">
                         <label class="control-label">Язык по умолчанию</label>
                         <div>
                             <select name="language" class="form-control">
@@ -69,7 +69,6 @@
                             <p class="text-muted"><small>Язык по умолчанию, используемый при отображении панели для этого пользователя.</small></p>
                         </div>
                     </div>
-                    -->
 
                 </div>
                 <div class="box-footer">
