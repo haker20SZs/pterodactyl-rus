@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
 @section('title')
-    Управление Пользователем: {{ $user->username }}
+    Управление пользователями: {{ $user->username }}
 @endsection
 
 @section('content-header')
     <h1>{{ $user->name_first }} {{ $user->name_last}}<small>{{ $user->username }}</small></h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Админ</a></li>
+        <li><a href="{{ route('admin.index') }}">Администратор</a></li>
         <li><a href="{{ route('admin.users') }}">Пользователи</a></li>
         <li class="active">{{ $user->username }}</li>
     </ol>
@@ -19,11 +19,11 @@
         <div class="col-md-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Личность</h3>
+                    <h3 class="box-title">Идентификация</h3>
                 </div>
                 <div class="box-body">
                     <div class="form-group">
-                        <label for="email" class="control-label">Email</label>
+                        <label for="email" class="control-label">Электронная почта</label>
                         <div>
                             <input type="email" name="email" value="{{ $user->email }}" class="form-control form-autocomplete-stop">
                         </div>
@@ -35,30 +35,17 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="registered" class="control-label">Имя</label>
+                        <label for="registered" class="control-label">Имя клиента</label>
                         <div>
                             <input type="text" name="name_first" value="{{ $user->name_first }}" class="form-control form-autocomplete-stop">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="registered" class="control-label">Фамилия</label>
+                        <label for="registered" class="control-label">Фамилия клиента</label>
                         <div>
                             <input type="text" name="name_last" value="{{ $user->name_last }}" class="form-control form-autocomplete-stop">
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="root_admin" class="control-label">Администратор</label>
-                        <div>
-                            <select name="root_admin" class="form-control">
-                                <option value="0">@lang('strings.no')</option>
-                                <option value="1" {{ $user->root_admin ? 'selected="selected"' : '' }}>@lang('strings.yes')</option>
-                            </select>
-                            <p class="text-muted"><small>Установка значения «Да» даёт пользователю полный административный доступ.</small></p>
-                        </div>
-                    </div>
-
-                    <!--
                     <div class="form-group">
                         <label class="control-label">Язык по умолчанию</label>
                         <div>
@@ -67,16 +54,14 @@
                                     <option value="{{ $key }}" @if($user->language === $key) selected @endif>{{ $value }}</option>
                                 @endforeach
                             </select>
-                            <p class="text-muted"><small>Язык по умолчанию, используемый при отображении панели для этого пользователя.</small></p>
+                            <p class="text-muted"><small>Язык по умолчанию, используемый при отображении панели для данного пользователя.</small></p>
                         </div>
                     </div>
-                    -->
-                    
                 </div>
                 <div class="box-footer">
                     {!! csrf_field() !!}
                     {!! method_field('PATCH') !!}
-                    <input type="submit" value="Обновить Данные" class="btn btn-primary btn-sm">
+                    <input type="submit" value="Обновление пользователя" class="btn btn-primary btn-sm">
                 </div>
             </div>
         </div>
@@ -91,7 +76,7 @@
                         <label for="password" class="control-label">Пароль <span class="field-optional"></span></label>
                         <div>
                             <input type="password" id="password" name="password" class="form-control form-autocomplete-stop">
-                            <p class="text-muted small">Оставьте поле пустым, чтобы сохранить пароль этого пользователя прежним. Пользователь не получит никакого уведомления, если пароль будет изменен.</p>
+                            <p class="text-muted small">Оставьте пустым, чтобы сохранить пароль этого пользователя неизменным. Пользователь не будет получать уведомления о смене пароля.</p>
                         </div>
                     </div>
                 </div>
@@ -100,25 +85,39 @@
         <div class="col-md-6">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Удалить пользователя</h3>
+                    <h3 class="box-title">Разрешения</h3>
                 </div>
                 <div class="box-body">
-                    <p class="no-margin">Для того чтобы можно было удалить эту учетную запись, с этой учетной записью не должно быть связано ни одного сервера.</p>
-                </div>
-
-                <div class="box-footer">
-                    <form action="{{ route('admin.users.view', $user->id) }}" method="POST">
-
-                        {!! csrf_field() !!}
-                        {!! method_field('DELETE') !!}
-                        <input id="delete" type="submit" class="btn btn-sm btn-danger pull-right" {{ $user->servers->count() < 1 ?: 'disabled' }} value="Удалить пользователя" />
-                    </form>
+                    <div class="form-group">
+                        <label for="root_admin" class="control-label">Администратор</label>
+                        <div>
+                            <select name="root_admin" class="form-control">
+                                <option value="0">@lang('strings.no')</option>
+                                <option value="1" {{ $user->root_admin ? 'selected="selected"' : '' }}>@lang('strings.yes')</option>
+                            </select>
+                            <p class="text-muted"><small>Установка значения «Да» дает пользователю полный административный доступ.</small></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </form>
     <div class="col-xs-12">
-
+        <div class="box box-danger">
+            <div class="box-header with-border">
+                <h3 class="box-title">Удалить пользователя</h3>
+            </div>
+            <div class="box-body">
+                <p class="no-margin">Для удаления этой учетной записи не должно быть серверов, связанных с ней.</p>
+            </div>
+            <div class="box-footer">
+                <form action="{{ route('admin.users.view', $user->id) }}" method="POST">
+                    {!! csrf_field() !!}
+                    {!! method_field('DELETE') !!}
+                    <input id="delete" type="submit" class="btn btn-sm btn-danger pull-right" {{ $user->servers->count() < 1 ?: 'disabled' }} value="Удалить пользователя" />
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
