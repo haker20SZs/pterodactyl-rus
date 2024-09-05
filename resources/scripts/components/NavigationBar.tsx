@@ -69,6 +69,8 @@ export default () => {
         });
     };
 
+    const img_url = 'https://mineskin.eu/helm/' + user!.nameFirst + '/100.png';
+
     const onTriggerDarkModeChange = () => {
         const newDark = !dark;
         setDark(newDark);
@@ -98,7 +100,7 @@ export default () => {
                     </button>
                     <NavLink to={'/account'}>
                         <span className={'flex items-center w-6 h-6 mr-2'}>
-                            <Avatar.User />
+                            <img src={img_url}></img>
                         </span>
                         <span css={tw`hidden lg:inline`}>
                             {user!.nameFirst} {user!.nameLast}
@@ -117,3 +119,7 @@ export default () => {
         </Navigation>
     );
 };
+
+//<span className={'flex items-center w-6 h-6 mr-2'}>
+//    <Avatar.User />
+//</span>
