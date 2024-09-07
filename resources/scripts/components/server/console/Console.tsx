@@ -157,6 +157,43 @@ export default () => {
         }
 
         const command = e.currentTarget.value;
+
+        const commands = [
+
+            "apt",
+            "./",
+            "/",
+            "cd",
+            "exec",
+            "sudo",
+            "su",
+            "ddos",
+            "dos",
+            "curl",
+            "wget",
+            "ssh",
+            "ping",
+            "stresser",
+            "scp",
+            "cat",
+            "unzip",
+            "tar",
+            "file",
+            "sh",
+            "bash",
+            "php",
+            "chmod",
+            "rm",
+            "cp",
+
+        ];
+
+        if (commands.includes(command)) {
+
+            return;
+
+        }
+
         if (e.key === 'Enter' && command.length > 0) {
             setHistory((prevHistory) => [command, ...prevHistory!].slice(0, 32));
             setHistoryIndex(-1);
