@@ -87,7 +87,7 @@ const AllocationRow = ({ allocation }: Props) => {
                 <InputSpinner visible={loading}>
                     <Textarea
                         css={tw`bg-zinc-300 border-zinc-500 hover:border-zinc-600 dark:(bg-zinc-900 border-zinc-600 hover:border-zinc-500)`}
-                        placeholder={'Открытые порты: 1500-2500 :: TCP - 2500-3000 :: UDP'}
+                        placeholder={'Открытые порты: 1500-2000 :: TCP - 2500-3000 :: UDP'}
                         defaultValue={allocation.notes || undefined}
                         onChange={(e) => setAllocationNotes(e.currentTarget.value)}
                     />

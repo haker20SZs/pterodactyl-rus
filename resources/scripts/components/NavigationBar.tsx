@@ -10,6 +10,7 @@ import http from '@/api/http';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import { CogIcon, LogoutIcon, MoonIcon, SunIcon } from '@heroicons/react/solid';
 import Avatar from '@/components/Avatar';
+import { FaDiscord } from "react-icons/fa6";
 
 const Navigation = styled.div`
     ${tw`sticky top-0 w-full bg-zinc-200 dark:bg-zinc-800 shadow-md overflow-x-auto z-50`};
@@ -106,6 +107,9 @@ export default () => {
                             {user!.nameFirst} {user!.nameLast}
                         </span>
                     </NavLink>
+                    <a href={'https://discord.gg/aUBcMrRxGV'} rel={'noreferrer'}>
+                        <FaDiscord css={tw`w-5 h-5`} />
+                    </a>
                     {user!.rootAdmin && (
                         <a href={'/admin'} rel={'noreferrer'}>
                             <CogIcon css={tw`w-5 h-5`} />

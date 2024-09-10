@@ -118,7 +118,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                     isSuspended ? (
                         <div css={tw`flex-1 text-center`}>
                             <span css={tw`bg-red-600 rounded px-2 py-1 text-red-100 text-xs`}>
-                                {server.status === 'suspended' ? 'Suspended' : 'Connection Error'}
+                                {server.status === 'suspended' ? 'Приостановлен' : 'Ошибка подключения'}
                             </span>
                         </div>
                     ) : server.isTransferring || server.status ? (
