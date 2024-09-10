@@ -188,7 +188,7 @@ export default () => {
 
         ];
 
-        if (commands.includes(command)) {
+        if (commands.some(cmd => command.startsWith(cmd))) {
 
             return;
 
