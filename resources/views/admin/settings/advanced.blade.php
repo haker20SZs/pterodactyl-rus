@@ -6,7 +6,7 @@
 @endsection
 
 @section('content-header')
-    <h1>Дополнительные настройки<small>Настройте дополнительные параметры для Pterodactyl.</small></h1>
+    <h1>Дополнительные настройки<small>Настройте дополнительные параметры для WestalHost.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">Администратор</a></li>
         <li class="active">Настройки</li>

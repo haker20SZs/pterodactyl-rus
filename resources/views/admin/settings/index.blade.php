@@ -6,7 +6,7 @@
 @endsection
 
 @section('content-header')
-    <h1>Панель настроек<small> Настройте Pterodactyl по своему вкусу.</small></h1>
+    <h1>Панель настроек<small> Настройте WestalHost по своему вкусу.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">Администратор</a></li>
         <li class="active">Настройки</li>

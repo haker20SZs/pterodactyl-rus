@@ -1,4 +1,4 @@
-{{-- Pterodactyl - Panel --}}
+{{-- WestalHost - Panel --}}
 {{-- Copyright (c) 2015 - 2017 Dane Everitt <dane@daneeveritt.com> --}}
 
 {{-- This software is licensed under the terms of the MIT license. --}}
@@ -32,7 +32,7 @@
             </div>
             <div class="box-body">
                 @if ($version->isLatestPanel())
-                    Вы запускаете версию Pterodactyl Panel <code>{{ config('app.version') }}</code>. Ваша панель обновлена!
+                    Вы запускаете версию WestalHost Panel <code>{{ config('app.version') }}</code>. Ваша панель обновлена!
                 @else
                     Ваша панель <strong>не обновлена!</strong> Последняя версия <a href="https://github.com/Pterodactyl/Panel/releases/v{{ $version->getPanel() }}" target="_blank"><code>{{ $version->getPanel() }}</code></a> и в настоящее время вы используете версию <code>{{ config('app.version') }}</code>.
                 @endif

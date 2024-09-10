@@ -6,7 +6,7 @@
 @endsection
 
 @section('content-header')
-    <h1>Настройки почты<small>Настройте, как Pterodactyl должен обрабатывать отправку электронной почты.</small></h1>
+    <h1>Настройки почты<small>Настройте, как WestalHost должен обрабатывать отправку электронной почты.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">Администратор</a></li>
         <li class="active">Настройки</li>
