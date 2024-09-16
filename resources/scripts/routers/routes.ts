@@ -61,26 +61,26 @@ interface Routes {
 export default {
     account: [
         {
-            path: '/',
+            path: '',
             name: 'Настройки',
             icon: UserCircleIcon,
             component: AccountOverviewContainer,
             exact: true,
         },
         {
-            path: '/api',
+            path: 'api',
             name: 'Учетные данные API',
             icon: CodeIcon,
             component: AccountApiContainer,
         },
         {
-            path: '/ssh',
+            path: 'ssh',
             name: 'Ключи SSH',
             icon: KeyIcon,
             component: AccountSSHContainer,
         },
         {
-            path: '/activity',
+            path: 'activity',
             name: 'Деятельность',
             icon: ClipboardListIcon,
             component: ActivityLogContainer,

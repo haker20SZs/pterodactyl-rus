@@ -1,9 +1,11 @@
-import { ServerIcon } from '@heroicons/react/solid';
+import { ServerIcon, CogIcon } from '@heroicons/react/solid';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import tw, { theme } from 'twin.macro';
 import routes from '@/routers/routes';
+import { ApplicationStore } from '@/state';
+import { useStoreState } from 'easy-peasy';
 
 const StyledSidebar = styled.div`
     ${tw`flex-none sticky top-14 h-[calc(100vh - 3.5rem)] md:w-72 bg-zinc-200 dark:bg-zinc-800 overflow-y-auto py-2`};
@@ -36,11 +38,20 @@ const StyledSidebar = styled.div`
 `;
 
 const Sidebar = ({ children }: { children?: React.ReactNode }): JSX.Element => {
+
+    const user = useStoreState((state: ApplicationStore) => state.user.data);
+
     return (
         <StyledSidebar>
             <NavLink to={'/'} exact>
                 <ServerIcon /> <span>Главная</span>
             </NavLink>
+
+            {user!.rootAdmin && (
+                <a href={'/admin'} rel={'noreferrer'}>
+                    <CogIcon /> <span>Админ панель</span>
+                </a>
+            )}
 
             <h6>Ваш аккаунт</h6>
             {routes.account
