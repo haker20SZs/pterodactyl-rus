@@ -57,7 +57,7 @@ const Sidebar = ({ children }: { children?: React.ReactNode }): JSX.Element => {
             {routes.account
                 .filter((route) => !!route.name)
                 .map((route) => (
-                    <NavLink key={route.path} to={'/account' + route.path} exact={route.exact}>
+                    <NavLink key={route.path} to={'/account/' + route.path} exact={route.exact}>
                         <>
                             {route.icon && (
                                 <>
