@@ -107,7 +107,7 @@ export default () => {
                             {user!.nameFirst} {user!.nameLast}
                         </span>
                     </NavLink>
-                    <a href={'https://discord.gg/aUBcMrRxGV'} rel={'noreferrer'}>
+                    <a href={'https://discord.gg/westalhost'} rel={'noreferrer'}>
                         <FaDiscord css={tw`w-5 h-5`} />
                     </a>
                     <button onClick={onTriggerLogout}>
